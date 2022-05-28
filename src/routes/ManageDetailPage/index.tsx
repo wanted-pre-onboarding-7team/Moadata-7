@@ -1,8 +1,20 @@
 import SEO from 'components/SEO'
 import styles from './manageDetailPage.module.scss'
 import Input from 'components/Input'
+import { useParams } from 'react-router-dom'
+
+export const MEMBER_LIST = [
+  { member_seq: '136', crt_ymdt: '2022-02-26 12:40:14', id: 'yhorong21' },
+  { member_seq: '328', crt_ymdt: '2022-04-16 07:19:31', id: 'seoltosil95' },
+  { member_seq: '380', crt_ymdt: '2022-04-17 03:00:23', id: 'yujaemin92' },
+]
 
 const ManageDetailPage = () => {
+  const params = useParams()
+  // const user = MEMBER_LIST.findIndex((obj) => {
+  //   return MEMBER_LIST[obj.member_seq === params.memberSeq]
+  // })
+
   return (
     <>
       <SEO title='회원상세' />

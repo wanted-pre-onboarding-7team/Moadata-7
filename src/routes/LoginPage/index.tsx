@@ -51,11 +51,6 @@ const LoginPage = () => {
       return
     }
 
-    if (inputState.id.value === '' || inputState.pw.value === '') {
-      dispathErrorState({ warning: false, message: ' ', isLoginActive: false })
-      return
-    }
-
     dispathErrorState({ warning: false, message: ' ', isLoginActive: true })
   }, [inputState])
 

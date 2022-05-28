@@ -19,6 +19,8 @@ const LoginInput: FC<IProps> = ({ type, state, dispatch }) => {
 
   const blurInputHandler = (e: FocusEvent<HTMLInputElement>) => {
     if (!e.currentTarget.dataset.target) return
+    if (e.currentTarget.value === '') return
+
     dispatch({ type: 'input_blur', target: e.currentTarget.dataset.target })
   }
 

@@ -1,22 +1,38 @@
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  height: 100%;
-}
+  max-width: 1440px;
+  height: 56px;
+  margin: 0 auto;
 
-.user {
-  display: flex;
-
-  li {
-    margin-left: 10px;
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1440px;
   }
 
-  li:last-of-type {
-    margin-right: 10px;
+  .logo {
+    width: 120px;
+    margin-top: 4px;
+    margin-left: 30px;
+    text-align: left;
+
+    .moaLogo {
+      width: 116px;
+    }
   }
 
-  a {
-    all: unset;
+  .user {
+    display: flex;
+
+    li {
+      margin-left: 12px;
+    }
+
+    li:last-of-type {
+      margin-right: 12px;
+    }
+
+    a {
+      all: unset;
+    }
   }
 }

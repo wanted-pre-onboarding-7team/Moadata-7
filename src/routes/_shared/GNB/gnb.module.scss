@@ -1,0 +1,60 @@
+@use '/src/styles/constants/colors';
+
+.gnb {
+  width: 100%;
+
+  .logo {
+    height: 50px;
+    margin-top: 12px;
+    text-align: left;
+
+    img {
+      width: 90px;
+    }
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+  }
+
+  .navList {
+    position: relative;
+
+    li {
+      position: relative;
+      width: 100%;
+
+      a {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+        font-weight: 600;
+        color: colors.$TEXT_SECONDARY;
+        border-radius: 10px;
+      }
+
+      .navIcon {
+        margin-right: 12px;
+      }
+
+      .isActive {
+        position: relative;
+        color: colors.$TEXT_PRIMARY;
+
+        .sideLine {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 128px;
+          width: 2px;
+          height: 36px;
+          background-color: colors.$TEXT_PRIMARY;
+          transition: 0.5s ease-in-out;
+        }
+      }
+    }
+  }
+}

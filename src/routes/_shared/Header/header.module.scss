@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.user {
+  display: flex;
+
+  li {
+    margin-left: 10px;
+  }
+
+  li:last-of-type {
+    margin-right: 10px;
+  }
+
+  a {
+    all: unset;
+  }
+}

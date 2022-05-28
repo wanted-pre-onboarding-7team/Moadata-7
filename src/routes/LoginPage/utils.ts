@@ -1,4 +1,4 @@
-export const idRegExp = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/
+export const idRegExp = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,20}$/
 export const pwRegExp =
   /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[`~!@#$%^&*()\-_=+[\]{};':",.<>/?|])[a-zA-Z0-9`~!@#$%^&*()\-_=+[\]{};':",.<>/?|]{8,}$/
 
@@ -9,9 +9,8 @@ export const errorMsgSet = {
 }
 
 export const INPUT_INIT = {
-  value: '',
-  isValid: true,
-  warning: false,
+  id: { value: '', isValid: true, warning: false },
+  pw: { value: '', isValid: true, warning: false },
 }
 
 export const ERROR_INIT = {

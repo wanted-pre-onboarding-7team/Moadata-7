@@ -1,10 +1,10 @@
 @use '/src/styles/constants/colors';
 
 .button {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 12px;
+  font-weight: 400;
   border: 1px solid colors.$BORDER;
-  border-radius: 5px;
+  border-radius: 10px;
   opacity: 1;
   transition: opacity 0.3s;
 
@@ -22,13 +22,14 @@
   }
 
   &.nomal {
-    width: 92px;
-    height: 40px;
+    width: 80px;
+    height: 32px;
   }
 
   &.large {
     width: 108px;
     height: 40px;
+    font-size: 14px;
   }
 
   &.bigLarge {

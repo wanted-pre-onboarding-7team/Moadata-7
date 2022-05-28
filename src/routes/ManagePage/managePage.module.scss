@@ -9,6 +9,80 @@
   @include container.title;
 }
 
-.manageContainer {
+.subTitle {
+  margin-bottom: 30px;
+}
+
+.search {
   @include container.container;
+
+  label {
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  input {
+    height: 100%;
+    padding: 5px;
+    margin-left: 12px;
+    text-align: center;
+    border: 1px solid colors.$BORDER;
+    border-radius: 8px;
+  }
+
+  div {
+    margin-bottom: 40px;
+  }
+
+  .member {
+    display: flex;
+
+    label {
+      flex-grow: 1;
+    }
+  }
+
+  .period {
+    button {
+      margin-left: 6px;
+    }
+
+    span {
+      margin: 0 10px;
+    }
+
+    input:last-of-type {
+      margin: 0;
+    }
+  }
+
+  .searchButtons {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+}
+
+.table {
+  @include container.container;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: center;
+
+  thead {
+    tr {
+      background-color: colors.$BG_ASIDE;
+    }
+  }
+}
+
+tr {
+  height: 50px;
+  line-height: 50px;
 }

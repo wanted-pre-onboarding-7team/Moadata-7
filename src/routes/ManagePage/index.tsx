@@ -34,10 +34,10 @@ const ManagePage = () => {
             <span> ~ </span>
             <input type='text' value='전체' />
           </label>
-          <Button size='small' primary>
+          <Button size='small' primary isAtive>
             오늘
           </Button>
-          <Button size='small' primary>
+          <Button size='small' primary isAtive>
             1주일
           </Button>
           <Button size='small' primary>

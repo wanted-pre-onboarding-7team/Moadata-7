@@ -12,3 +12,8 @@
 .manageDetailContainer {
   @include container.container;
 }
+
+.userContainer {
+  display: flex;
+  margin-bottom: 6px;
+}

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import dayjs from 'dayjs'
 
+import { NoResult } from 'assets/svg'
 import { filteredListState } from './state'
 
 import styles from './managePage.module.scss'
@@ -19,6 +20,13 @@ const Table = () => {
 
     navigate(`/member/manage/${memberSeq}`)
   }
+
+  if (filteredList.length === 0)
+    return (
+      <div className={styles.noResult}>
+        <NoResult />
+      </div>
+    )
 
   return (
     <table className={styles.table}>

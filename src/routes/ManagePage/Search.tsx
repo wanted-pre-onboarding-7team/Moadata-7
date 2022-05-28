@@ -24,7 +24,11 @@ const Search = () => {
   }
 
   const handleSearchClick = () => {
-    if (!memberId && !memberSeq) return
+    if (!memberId && !memberSeq) {
+      resetFilteredList()
+
+      return
+    }
 
     let filteredList = memberList
 
@@ -60,9 +64,9 @@ const Search = () => {
       <div className={styles.period}>
         <label>
           조회기간
-          <input type='text' placeholder='전체' disabled />
+          <input type='text' className={styles.periodInput} placeholder='전체' disabled />
           <span> ~ </span>
-          <input type='text' placeholder='전체' disabled />
+          <input type='text' className={styles.periodInput} placeholder='전체' disabled />
         </label>
         <Button size='small' primary>
           오늘

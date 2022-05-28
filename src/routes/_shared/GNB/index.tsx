@@ -1,25 +1,23 @@
 import { NavLink } from 'react-router-dom'
 import styles from './gnb.module.scss'
-import Logo from '../../../assets/images/moaLogo.png'
 import { cx } from 'styles'
+import { GNB_LIST } from 'model/gnb'
 
 const GNB = () => {
   return (
     <div className={styles.gnb}>
       <div className={styles.wrapper}>
         <ul className={styles.navList}>
-          <li>
-            <NavLink to='' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
-              백오피스 홈
-              <div className={styles.sideLine} />
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='member/manage' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
-              회원관리
-              <div className={styles.sideLine} />
-            </NavLink>
-          </li>
+          {GNB_LIST.map((item) => {
+            return (
+              <li key={item.key}>
+                <NavLink to={item.path} className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
+                  {item.title}
+                  <div className={styles.sideLine} />
+                </NavLink>
+              </li>
+            )
+          })}
         </ul>
       </div>
     </div>

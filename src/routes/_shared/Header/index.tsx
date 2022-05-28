@@ -6,9 +6,9 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <ul className={styles.user}>
-        <li>7팀</li>
+        <li>모아-7팀</li>
         <li>
-          <Button size='large' primary>
+          <Button size='nomal' primary>
             <NavLink to='login'>로그아웃</NavLink>
           </Button>
         </li>

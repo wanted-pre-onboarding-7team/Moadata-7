@@ -1,0 +1,21 @@
+@use '/src/styles/constants/colors';
+
+@mixin subNav() {
+  height: 56px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 56px;
+}
+@mixin title() {
+  height: 60px;
+  margin-bottom: 20px;
+  font-size: 26px;
+  line-height: 60px;
+}
+
+@mixin container() {
+  padding: 20px;
+  margin-bottom: 60px;
+  background: colors.$BG_WHITE;
+  border-radius: 20px;
+}

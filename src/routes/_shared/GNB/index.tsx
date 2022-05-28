@@ -6,12 +6,6 @@ import { cx } from 'styles'
 const GNB = () => {
   return (
     <div className={styles.gnb}>
-      <div className={styles.logo}>
-        <NavLink to='/'>
-          <img src={Logo} alt='모아데이터' />
-        </NavLink>
-      </div>
-
       <div className={styles.wrapper}>
         <ul className={styles.navList}>
           <li>

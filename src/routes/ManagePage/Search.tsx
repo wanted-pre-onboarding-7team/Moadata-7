@@ -79,10 +79,10 @@ const Search = () => {
         </Button>
       </div>
       <div className={styles.searchButtons}>
-        <Button size='nomal' primary onClick={handleResetClick}>
+        <Button size='normal' primary onClick={handleResetClick}>
           필터 초기화
         </Button>
-        <Button size='nomal' primary onClick={handleSearchClick}>
+        <Button size='normal' primary onClick={handleSearchClick}>
           검색
         </Button>
       </div>

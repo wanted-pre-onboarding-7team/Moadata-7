@@ -1,33 +1,59 @@
 import { Dispatch, useEffect } from 'react'
-import { IAction, IInput } from './reducers'
 
-export const useInputValid = (stateType: string, state: IInput, dispatch: Dispatch<IAction>) => {
+import { IAction, IState } from './reducers'
+
+export const useInputValid = (state: IState, dispatch: Dispatch<IAction>) => {
+  const warning = false
+
   useEffect(() => {
-    if (state.value === '') {
+    if (state.id.value === '') {
       dispatch({
-        type: stateType === 'id' ? 'set_id' : 'set_pw',
-        value: state.value,
-        warning: false,
+        type: 'set_id_error',
+        warning,
         displayMessage: false,
       })
       return
     }
 
-    if (!state.isValid) {
+    if (!state.id.isValid) {
       dispatch({
-        type: stateType === 'id' ? 'set_id' : 'set_pw',
-        value: state.value,
-        warning: false,
+        type: 'set_id_error',
+        warning,
         displayMessage: true,
       })
       return
     }
 
     dispatch({
-      type: stateType === 'id' ? 'set_id' : 'set_pw',
-      value: state.value,
-      warning: false,
+      type: 'set_id_error',
+      warning,
       displayMessage: false,
     })
-  }, [dispatch, state.isValid, state.value, stateType])
+  }, [dispatch, state.id.value, state.id.isValid, warning])
+
+  useEffect(() => {
+    if (state.pw.value === '') {
+      dispatch({
+        type: 'set_pw_error',
+        warning,
+        displayMessage: false,
+      })
+      return
+    }
+
+    if (!state.pw.isValid) {
+      dispatch({
+        type: 'set_pw_error',
+        warning,
+        displayMessage: true,
+      })
+      return
+    }
+
+    dispatch({
+      type: 'set_pw_error',
+      warning,
+      displayMessage: false,
+    })
+  }, [dispatch, state.pw.isValid, state.pw.value, warning])
 }

@@ -7,57 +7,46 @@ import { IAction, IState } from '../reducers'
 import styles from './loginInput.module.scss'
 
 interface IProps {
-  type: 'id' | 'pw'
+  inputType: 'id' | 'pw'
   state: IState
   dispatch: Dispatch<IAction>
 }
 
-const LoginInput: FC<IProps> = ({ type, state, dispatch }) => {
+const LoginInput: FC<IProps> = ({ inputType, state, dispatch }) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const changeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch({
-      type: `set_${type}`,
+      type: `set_${inputType}_value`,
       value: e.currentTarget.value,
-      warning: false,
-      displayMessage: !state[type].isValid,
     })
   }
 
   const blurInputHandler = () => {
-    if (state[type].value === '') {
-      dispatch({
-        type: `set_${type}`,
-        value: state[type].value,
-        warning: false,
-        displayMessage: state[type].displayMessage,
-      })
-      return
-    }
-
     dispatch({
-      type: `set_${type}`,
-      value: state[type].value,
-      warning: !state[type].isValid,
-      displayMessage: state[type].displayMessage,
+      type: `set_${inputType}_warning`,
+      warning: state[inputType].value === '' ? false : !state[inputType].isValid,
     })
   }
 
   useMount(() => {
-    if (type === 'id' && inputRef.current) inputRef.current.focus()
+    if (inputType === 'id' && inputRef.current) inputRef.current.focus()
   })
+
+  const inputValueType = inputType === 'id' ? 'text' : 'password'
+  const placeholder = inputType === 'id' ? '아이디' : '비밀번호'
 
   return (
     <input
       ref={inputRef}
-      type={type === 'id' ? 'text' : 'password'}
-      className={cx({ [styles.inputWarning]: state[type].warning })}
-      data-target={type}
-      value={state[type].value}
+      data-target={inputType}
+      type={inputValueType}
+      value={state[inputType].value}
+      spellCheck={false}
+      placeholder={placeholder}
       onChange={changeInputHandler}
       onBlur={blurInputHandler}
-      placeholder={type === 'id' ? '아이디' : '비밀번호'}
-      spellCheck={false}
+      className={cx({ [styles.inputWarning]: state[inputType].warning })}
     />
   )
 }

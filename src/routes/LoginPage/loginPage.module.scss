@@ -22,17 +22,20 @@
       letter-spacing: 0.5px;
     }
 
-    .guide {
+    .guideWrapper {
       width: 100%;
       height: 20px;
       padding: 0 15px;
-      font-size: 14px;
-      color: colors.$TEXT_SECONDARY;
-      letter-spacing: 0.5px;
-    }
 
-    .warning {
-      color: colors.$TEXT_RED;
+      .guide {
+        font-size: 14px;
+        color: colors.$TEXT_SECONDARY;
+        letter-spacing: 0.5px;
+      }
+
+      .warning {
+        color: colors.$TEXT_RED;
+      }
     }
 
     button {

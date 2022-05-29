@@ -1,4 +1,5 @@
 import styles from './manageDetailPage.module.scss'
+import StepChart from './StepChart'
 
 import { useParams, useNavigate } from 'react-router-dom'
 import { useMount } from 'react-use'
@@ -43,6 +44,7 @@ const ManageDetailPage = () => {
         <div className={styles.userContainer}>
           <UserInfo />
         </div>
+        <StepChart />
       </div>
     </>
   )

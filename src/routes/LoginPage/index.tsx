@@ -1,18 +1,22 @@
-import { useEffect, useReducer } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { cx } from 'styles'
 
-import { MoaLogo } from 'assets/svgs'
+import { MoaLogo } from 'assets/svg'
 import { errorReducer, inputReducer } from './reducers'
 import { errorMsgSet, ERROR_INIT, INPUT_INIT } from './utils'
 
-import SEO from 'components/SEO'
-import Button from 'components/Button'
-
-import styles from './loginPage.module.scss'
 import LoginInput from './LoginInput'
 
+import SEO from 'components/SEO'
+import Button from 'components/Button'
+import PopupPortal from './Popup/PopupPortal'
+import Popup from './Popup'
+
+import styles from './loginPage.module.scss'
+
 const LoginPage = () => {
+  const [isOpenPopup, setIsOpenPopup] = useState(false)
   const [inputState, dispatchInputState] = useReducer(inputReducer, INPUT_INIT)
   const [errorState, dispathErrorState] = useReducer(errorReducer, ERROR_INIT)
   const navigate = useNavigate()
@@ -27,6 +31,8 @@ const LoginPage = () => {
       navigate('/')
       return
     }
+
+    setIsOpenPopup(true)
     dispathErrorState({ warning: true, message: errorMsgSet.loginFailed })
   }
 
@@ -64,6 +70,7 @@ const LoginPage = () => {
         </Button>
       </form>
       <MoaLogo />
+      <PopupPortal>{isOpenPopup && <Popup setIsOpenPopup={setIsOpenPopup} />}</PopupPortal>
     </div>
   )
 }

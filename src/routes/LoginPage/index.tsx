@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
+import store from 'store'
 import { cx } from 'styles'
 
 import { MoaLogo } from 'assets/svg'
@@ -32,6 +33,7 @@ const LoginPage = () => {
       inputState.id.value === process.env.REACT_APP_ADMIN_ID &&
       inputState.pw.value === process.env.REACT_APP_ADMIN_PW
     ) {
+      store.set('login', { isLoggedIn: true })
       setIsLoggedIn(true)
       navigate('/')
       return

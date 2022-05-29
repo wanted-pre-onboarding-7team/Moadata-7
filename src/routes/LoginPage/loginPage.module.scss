@@ -24,9 +24,8 @@
 
     .guide {
       width: 100%;
-      height: 40px;
+      height: 20px;
       padding: 0 15px;
-      margin: 10px 0;
       font-size: 14px;
       color: colors.$TEXT_SECONDARY;
       letter-spacing: 0.5px;
@@ -39,6 +38,7 @@
     button {
       width: 100% !important;
       height: 70px !important;
+      margin-top: 50px;
       border-radius: 10px !important;
     }
   }

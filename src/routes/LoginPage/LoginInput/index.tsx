@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, Dispatch, FC, useRef } from 'react'
+import { ChangeEvent, Dispatch, FC, useRef } from 'react'
 import { useMount } from 'react-use'
 import { cx } from 'styles'
 
@@ -16,15 +16,31 @@ const LoginInput: FC<IProps> = ({ type, state, dispatch }) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const changeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.currentTarget.dataset.target) return
-    dispatch({ type: 'user_input', target: e.currentTarget.dataset.target, value: e.currentTarget.value })
+    dispatch({
+      type: `set_${type}`,
+      value: e.currentTarget.value,
+      warning: false,
+      displayMessage: !state[type].isValid,
+    })
   }
 
-  const blurInputHandler = (e: FocusEvent<HTMLInputElement>) => {
-    if (!e.currentTarget.dataset.target) return
-    if (e.currentTarget.value === '') return
+  const blurInputHandler = () => {
+    if (state[type].value === '') {
+      dispatch({
+        type: `set_${type}`,
+        value: state[type].value,
+        warning: false,
+        displayMessage: state[type].displayMessage,
+      })
+      return
+    }
 
-    dispatch({ type: 'input_blur', target: e.currentTarget.dataset.target })
+    dispatch({
+      type: `set_${type}`,
+      value: state[type].value,
+      warning: !state[type].isValid,
+      displayMessage: state[type].displayMessage,
+    })
   }
 
   useMount(() => {

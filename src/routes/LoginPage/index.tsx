@@ -48,7 +48,6 @@ const LoginPage = () => {
       return
     }
 
-    console.log(1)
     dispathErrorState({ warning: false, message: ' ', isLoginActive: true })
   }, [inputState])
 

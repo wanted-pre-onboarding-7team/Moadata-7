@@ -9,8 +9,8 @@ export const errorMsgSet = {
 }
 
 export const INPUT_INIT = {
-  id: { value: '', isValid: true, warning: false },
-  pw: { value: '', isValid: true, warning: false },
+  id: { value: '', isValid: false, warning: false },
+  pw: { value: '', isValid: false, warning: false },
 }
 
 export const ERROR_INIT = {

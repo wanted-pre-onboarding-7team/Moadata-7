@@ -35,22 +35,20 @@ const LoginPage = () => {
       dispathErrorState({ warning: true, message: errorMsgSet.idGuide })
       return
     }
-
     if (inputState.pw.warning) {
       dispathErrorState({ warning: true, message: errorMsgSet.pwGuide })
       return
     }
-
     if (!inputState.id.isValid) {
       dispathErrorState({ warning: false, message: errorMsgSet.idGuide })
       return
     }
-
     if (!inputState.pw.isValid) {
       dispathErrorState({ warning: false, message: errorMsgSet.pwGuide })
       return
     }
 
+    console.log(1)
     dispathErrorState({ warning: false, message: ' ', isLoginActive: true })
   }, [inputState])
 

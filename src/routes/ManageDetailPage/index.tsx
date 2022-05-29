@@ -1,7 +1,13 @@
-import SEO from 'components/SEO'
 import styles from './manageDetailPage.module.scss'
-import Input from 'components/Input'
-import { useParams } from 'react-router-dom'
+
+import { useParams, useNavigate } from 'react-router-dom'
+import { useMount } from 'react-use'
+
+import { useSetRecoilState } from 'recoil'
+import { userInfoState } from './state'
+
+import SEO from 'components/SEO'
+import UserInfo from './UserInfo'
 
 export const MEMBER_LIST = [
   { member_seq: '136', crt_ymdt: '2022-02-26 12:40:14', id: 'yhorong21' },
@@ -10,23 +16,33 @@ export const MEMBER_LIST = [
 ]
 
 const ManageDetailPage = () => {
+  const setUserInfo = useSetRecoilState(userInfoState)
   const params = useParams()
-  // const user = MEMBER_LIST.findIndex((obj) => {
-  //   return MEMBER_LIST[obj.member_seq === params.memberSeq]
-  // })
+  const user = MEMBER_LIST.filter((obj) => {
+    return obj.member_seq === params.memberSeq
+  })[0]
+
+  const navigate = useNavigate()
+  useMount(() => {
+    navigate(`/member/manage/${params.memberSeq}`, { replace: true })
+    setUserInfo(user)
+  })
 
   return (
     <>
       <SEO title='회원상세' />
-      <nav className={styles.subNav}>홈 &gt; 회원관리 &gt; 회원상세</nav>
+      <nav className={styles.subNav}>
+        홈 &gt;
+        <button type='button' onClick={() => navigate(-1)}>
+          회원관리
+        </button>
+        &gt; 회원상세
+      </nav>
       <h1 className={styles.title}> 회원 상세 정보</h1>
-
       <div className={styles.manageDetailContainer}>
         <div className={styles.userContainer}>
-          <Input text='로그인 ID' id='1' value='1' />
-          <Input text='회원 번호' id='2' value='1' />
+          <UserInfo />
         </div>
-        <Input text='가입일시' id='3' value='2021-12-22' />
       </div>
     </>
   )

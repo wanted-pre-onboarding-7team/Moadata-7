@@ -3,6 +3,11 @@
 
 .subNav {
   @include container.subNav;
+
+  button {
+    all: unset;
+    cursor: pointer;
+  }
 }
 
 .title {
@@ -13,7 +18,13 @@
   @include container.container;
 }
 
-.userContainer {
-  display: flex;
+.userInfoContainer {
+  width: 813px;
   margin-bottom: 6px;
+
+  .userInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
 }

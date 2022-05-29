@@ -33,3 +33,22 @@ const App = () => {
             )
           })}
 ```
+
+## 3. 회원관리 및 페이지 이동
+- [x] 특정 회원 정보 useParams으로 받은 후 recoil로 상태 관리 적용
+```tsx
+ const params = useParams()
+  const user = MEMBER_LIST.filter((obj) => {
+    return obj.member_seq === params.memberSeq
+  })[0]
+```
+
+- [x] 회원관리 클릭시 이전 페이지로 이동
+- [] 로그인 상태에 따라서 redirect 주기 (합친 후 적용)
+```tsx
+const navigate = useNavigate()
+  useMount(() => {
+    navigate(`/member/manage/${params.memberSeq}`, { replace: true })
+    setUserInfo(user)
+  })
+```

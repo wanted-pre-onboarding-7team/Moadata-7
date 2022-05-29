@@ -7,7 +7,7 @@ interface Props {
   children: ReactNode
   size: 'bigLarge' | 'large' | 'nomal' | 'small'
   primary?: boolean
-  onClick?: () => void
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const Button = ({ children, size, primary, onClick }: Props) => {

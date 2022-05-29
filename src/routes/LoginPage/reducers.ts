@@ -27,8 +27,14 @@ export const inputReducer = (state: IState, action: IAction) => {
   if (action.type === 'user_input' && action.value !== undefined) {
     const newState =
       action.target === 'id'
-        ? { ...state, id: { value: action.value, warning: false, isValid: idRegExp.test(action.value) } }
-        : { ...state, pw: { value: action.value, warning: false, isValid: pwRegExp.test(action.value) } }
+        ? {
+            ...state,
+            id: { value: action.value, warning: false, isValid: idRegExp.test(action.value) },
+          }
+        : {
+            ...state,
+            pw: { value: action.value, warning: false, isValid: pwRegExp.test(action.value) },
+          }
     return newState
   }
 

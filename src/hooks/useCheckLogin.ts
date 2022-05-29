@@ -1,12 +1,17 @@
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import store from 'store'
+import dayjs from 'dayjs'
 
 const useCheckLogin = () => {
   const navigate = useNavigate()
   const loginInfo = store.get('login')
   const loginCheck = useCallback(() => {
     if (loginInfo === undefined) {
+      navigate('/login')
+    }
+    if (dayjs().isAfter(loginInfo.expire)) {
+      store.remove('login')
       navigate('/login')
     }
   }, [loginInfo, navigate])

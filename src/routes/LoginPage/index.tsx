@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import store from 'store'
+import dayjs from 'dayjs'
 import { cx } from 'styles'
 
 import { MoaLogo } from 'assets/svg'
@@ -30,7 +31,7 @@ const LoginPage = () => {
       inputState.id.value === process.env.REACT_APP_ADMIN_ID &&
       inputState.pw.value === process.env.REACT_APP_ADMIN_PW
     ) {
-      store.set('login', { isLoggedIn: true })
+      store.set('login', { isLoggedIn: true, expire: dayjs().add(7, 'hour') })
       navigate('/')
       return
     }

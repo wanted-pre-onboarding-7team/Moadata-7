@@ -5,7 +5,7 @@ import styles from './button.module.scss'
 
 interface Props {
   children: ReactNode
-  size: 'bigLarge' | 'large' | 'nomal' | 'small'
+  size: 'extraLarge' | 'large' | 'normal' | 'small'
   primary?: boolean
   onClick?: MouseEventHandler
 }

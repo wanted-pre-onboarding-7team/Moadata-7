@@ -17,7 +17,7 @@ const Header = () => {
         <ul className={styles.user}>
           <li>moaAdmin</li>
           <li>
-            <Button size='nomal' primary>
+            <Button size='normal' primary>
               <NavLink to='login'>로그아웃</NavLink>
             </Button>
           </li>

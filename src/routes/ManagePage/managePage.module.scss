@@ -9,6 +9,120 @@
   @include container.title;
 }
 
-.manageContainer {
+.subTitle {
+  margin-bottom: 30px;
+}
+
+.search {
   @include container.container;
+
+  label {
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  input {
+    padding: 5px 10px;
+    margin-left: 12px;
+    border: 1px solid colors.$BORDER;
+    border-radius: 8px;
+
+    &::placeholder {
+      text-align: center;
+    }
+
+    &:focus::placeholder {
+      color: colors.$BG_G;
+    }
+  }
+
+  div {
+    margin-bottom: 40px;
+  }
+
+  .member {
+    display: flex;
+
+    label {
+      flex-grow: 1;
+    }
+  }
+
+  .period {
+    button {
+      margin-left: 6px;
+    }
+
+    .periodInput {
+      background-color: colors.$BG_G;
+    }
+
+    span {
+      margin: 0 10px;
+    }
+
+    input:last-of-type {
+      margin: 0;
+    }
+  }
+
+  .searchButtons {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+}
+
+.table {
+  @include container.container;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: center;
+
+  thead {
+    tr {
+      background-color: colors.$BG_ASIDE;
+    }
+  }
+
+  tbody {
+    .detailManage {
+      padding: 7px 15px;
+      font-size: 8px;
+      font-weight: bold;
+      color: colors.$BT_WHITE;
+      background-color: colors.$BT_BASIC;
+      border-radius: 5px;
+      opacity: 1;
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+tr {
+  height: 50px;
+  line-height: 50px;
+}
+
+.noResult {
+  @include container.container;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 215px;
+
+  svg {
+    width: 100px;
+    height: 100px;
+  }
 }

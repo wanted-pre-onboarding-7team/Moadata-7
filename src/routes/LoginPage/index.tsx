@@ -1,16 +1,15 @@
 import { useEffect, useReducer, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSetRecoilState } from 'recoil'
+import store from 'store'
 import { cx } from 'styles'
 
 import { MoaLogo } from 'assets/svg'
-import { loggedInAtom } from 'state/login'
-import { errorReducer, inputReducer } from './reducers'
-import { errorMsgSet, ERROR_INIT, INPUT_INIT } from './utils'
-
-import LoginInput from './LoginInput'
+import { useInputValid } from './hooks'
+import { inputReducer } from './reducers'
+import { errorMsgSet, INPUT_INIT } from './utils'
 
 import SEO from 'components/SEO'
+import LoginInput from './LoginInput'
 import Button from 'components/Button'
 import PopupPortal from './Popup/PopupPortal'
 import Popup from './Popup'
@@ -19,61 +18,59 @@ import styles from './loginPage.module.scss'
 
 const LoginPage = () => {
   const [isOpenPopup, setIsOpenPopup] = useState(false)
+  const [isLoginActive, setIsLoginActive] = useState(false)
   const [inputState, dispatchInputState] = useReducer(inputReducer, INPUT_INIT)
-  const [errorState, dispathErrorState] = useReducer(errorReducer, ERROR_INIT)
-  const setIsLoggedIn = useSetRecoilState(loggedInAtom)
+
   const navigate = useNavigate()
 
   const loginHandler = () => {
-    if (!errorState.isLoginActive) return
+    if (!isLoginActive) return
 
     if (
       inputState.id.value === process.env.REACT_APP_ADMIN_ID &&
       inputState.pw.value === process.env.REACT_APP_ADMIN_PW
     ) {
-      setIsLoggedIn(true)
+      store.set('login', { isLoggedIn: true })
       navigate('/')
       return
     }
 
     setIsOpenPopup(true)
-    dispathErrorState({ warning: true, message: errorMsgSet.loginFailed })
   }
 
   useEffect(() => {
-    if (inputState.id.warning) {
-      dispathErrorState({ warning: true, message: errorMsgSet.idGuide })
-      return
-    }
-    if (inputState.pw.warning) {
-      dispathErrorState({ warning: true, message: errorMsgSet.pwGuide })
-      return
-    }
-    if (!inputState.id.isValid) {
-      dispathErrorState({ warning: false, message: errorMsgSet.idGuide })
-      return
-    }
-    if (!inputState.pw.isValid) {
-      dispathErrorState({ warning: false, message: errorMsgSet.pwGuide })
+    if (inputState.id.isValid && inputState.pw.isValid) {
+      setIsLoginActive(true)
       return
     }
 
-    dispathErrorState({ warning: false, message: ' ', isLoginActive: true })
-  }, [inputState])
+    setIsLoginActive(false)
+  }, [inputState.id.isValid, inputState.pw.isValid])
+
+  useInputValid(inputState, dispatchInputState)
 
   return (
     <div className={styles.loginPage}>
       <SEO title='로그인' />
-      <form>
-        <h1>백오피스</h1>
-        <LoginInput type='id' state={inputState} dispatch={dispatchInputState} />
-        <LoginInput type='pw' state={inputState} dispatch={dispatchInputState} />
-        <p className={cx(styles.guide, { [styles.warning]: errorState.warning })}>{errorState.message}</p>
-        <Button size='extraLarge' primary={errorState.isLoginActive} onClick={loginHandler}>
+      <form className={styles.loginForm}>
+        <h1 className={styles.loginTitle}>백오피스</h1>
+        <LoginInput inputType='id' state={inputState} dispatch={dispatchInputState} />
+        <div className={styles.guideWrapper}>
+          <p className={cx(styles.guide, { [styles.warning]: inputState.id.warning })}>
+            {inputState.id.displayMessage ? errorMsgSet.id : ''}
+          </p>
+        </div>
+        <LoginInput inputType='pw' state={inputState} dispatch={dispatchInputState} />
+        <div className={styles.guideWrapper}>
+          <p className={cx(styles.guide, { [styles.warning]: inputState.pw.warning })}>
+            {inputState.pw.displayMessage ? errorMsgSet.pw : ''}
+          </p>
+        </div>
+        <Button size='extraLarge' primary={isLoginActive} onClick={loginHandler}>
           로그인
         </Button>
       </form>
-      <MoaLogo />
+      <MoaLogo className={styles.logo} />
       <PopupPortal>{isOpenPopup && <Popup setIsOpenPopup={setIsOpenPopup} />}</PopupPortal>
     </div>
   )

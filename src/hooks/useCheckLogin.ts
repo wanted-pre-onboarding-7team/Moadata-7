@@ -1,19 +1,22 @@
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
-import { loggedInAtom } from 'state/login'
+import store from 'store'
 
 const useCheckLogin = () => {
-  const IsLoggedIn = useRecoilValue(loggedInAtom)
   const navigate = useNavigate()
-
+  const loginInfo = store.get('login')
   const loginCheck = useCallback(() => {
-    if (!IsLoggedIn) {
+    if (loginInfo === undefined) {
       navigate('/login')
     }
-  }, [navigate, IsLoggedIn])
+  }, [loginInfo, navigate])
 
-  return { loginCheck }
+  const logOut = useCallback(() => {
+    store.remove('login')
+    navigate('/login')
+  }, [navigate])
+
+  return { loginCheck, logOut }
 }
 
 export { useCheckLogin }

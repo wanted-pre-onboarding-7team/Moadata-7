@@ -1,9 +1,18 @@
 import { idRegExp, pwRegExp } from './utils'
 
-interface IInput {
+type ActionType =
+  | 'set_id_value'
+  | 'set_pw_value'
+  | 'set_id_warning'
+  | 'set_pw_warning'
+  | 'set_id_error'
+  | 'set_pw_error'
+
+export interface IInput {
   value: string
   isValid: boolean
   warning: boolean
+  displayMessage: boolean
 }
 
 export interface IState {
@@ -12,47 +21,76 @@ export interface IState {
 }
 
 export interface IAction {
-  type: string
-  target: string
+  type: ActionType
   value?: string
-}
-
-interface IError {
   warning?: boolean
-  message?: string
-  isLoginActive?: boolean
+  displayMessage?: boolean
 }
 
 export const inputReducer = (state: IState, action: IAction) => {
-  if (action.type === 'user_input' && action.value !== undefined) {
-    const newState =
-      action.target === 'id'
-        ? {
-            ...state,
-            id: { value: action.value, warning: false, isValid: idRegExp.test(action.value) },
-          }
-        : {
-            ...state,
-            pw: { value: action.value, warning: false, isValid: pwRegExp.test(action.value) },
-          }
-    return newState
+  if (action.type === 'set_id_value' && action.value !== undefined) {
+    return {
+      ...state,
+      id: {
+        ...state.id,
+        value: action.value,
+        isValid: idRegExp.test(action.value),
+      },
+    }
   }
 
-  if (action.type === 'input_blur') {
-    const newState =
-      action.target === 'id'
-        ? { ...state, id: { ...state.id, warning: !state.id.isValid } }
-        : { ...state, pw: { ...state.pw, warning: !state.pw.isValid } }
-    return newState
+  if (action.type === 'set_pw_value' && action.value !== undefined) {
+    return {
+      ...state,
+      pw: {
+        ...state.pw,
+        value: action.value,
+        isValid: pwRegExp.test(action.value),
+      },
+    }
+  }
+
+  if (action.type === 'set_id_warning' && action.warning !== undefined) {
+    return {
+      ...state,
+      id: {
+        ...state.id,
+        warning: action.warning,
+      },
+    }
+  }
+
+  if (action.type === 'set_pw_warning' && action.warning !== undefined) {
+    return {
+      ...state,
+      pw: {
+        ...state.pw,
+        warning: action.warning,
+      },
+    }
+  }
+
+  if (action.type === 'set_id_error' && action.warning !== undefined && action.displayMessage !== undefined) {
+    return {
+      ...state,
+      id: {
+        ...state.id,
+        warning: action.warning,
+        displayMessage: action.displayMessage,
+      },
+    }
+  }
+
+  if (action.type === 'set_pw_error' && action.warning !== undefined && action.displayMessage !== undefined) {
+    return {
+      ...state,
+      pw: {
+        ...state.pw,
+        warning: action.warning,
+        displayMessage: action.displayMessage,
+      },
+    }
   }
 
   return state
-}
-
-export const errorReducer = (state: IError, action: IError) => {
-  return {
-    warning: action.warning !== undefined ? action.warning : state.warning,
-    message: action.message || state.message,
-    isLoginActive: action.isLoginActive || false,
-  }
 }

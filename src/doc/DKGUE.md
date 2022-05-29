@@ -44,11 +44,28 @@ const App = () => {
 ```
 
 - [x] 회원관리 클릭시 이전 페이지로 이동
-- [] 로그인 상태에 따라서 redirect 주기 (합친 후 적용)
+
 ```tsx
 const navigate = useNavigate()
   useMount(() => {
     navigate(`/member/manage/${params.memberSeq}`, { replace: true })
     setUserInfo(user)
   })
+```
+
+- [x] 로그인 상태에 따라서 redirect 주기 (합친 후 적용)
+recoil로 로그인 상태를 관리 후 적용 그후 로그인 상태가 아니면 적용
+```tsx
+const useCheckLogin = () => {
+  const IsLoggedIn = useRecoilValue(loggedInAtom)
+  const navigate = useNavigate()
+
+  const loginCheck = useCallback(() => {
+    if (!IsLoggedIn) {
+      navigate('/login')
+    }
+  }, [navigate, IsLoggedIn])
+
+  return { loginCheck }
+}
 ```

@@ -6,6 +6,7 @@ import { useMount } from 'react-use'
 
 import { useSetRecoilState } from 'recoil'
 import { userInfoState } from './state'
+import store from 'store'
 
 import SEO from 'components/SEO'
 import UserInfo from './UserInfo'

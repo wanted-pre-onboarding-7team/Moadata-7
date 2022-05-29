@@ -12,12 +12,12 @@
   border-radius: 10px;
   box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 5%);
 
-  input::placeholder {
+  &::placeholder {
     font-weight: 600;
     color: colors.$TEXT_SECONDARY;
   }
 
-  .inputWarning {
+  &_warning {
     border: 1px solid colors.$TEXT_RED;
   }
 }

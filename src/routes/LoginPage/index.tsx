@@ -1,11 +1,13 @@
 import { useEffect, useReducer, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSetRecoilState } from 'recoil'
 import { cx } from 'styles'
 
 import { MoaLogo } from 'assets/svg'
 import { useInputValid } from './hooks'
 import { inputReducer } from './reducers'
 import { errorMsgSet, INPUT_INIT } from './utils'
+import { loggedInAtom } from 'state/login'
 
 import SEO from 'components/SEO'
 import LoginInput from './LoginInput'
@@ -19,6 +21,7 @@ const LoginPage = () => {
   const [isOpenPopup, setIsOpenPopup] = useState(false)
   const [isLoginActive, setIsLoginActive] = useState(false)
   const [inputState, dispatchInputState] = useReducer(inputReducer, INPUT_INIT)
+  const setIsLoggedIn = useSetRecoilState(loggedInAtom)
 
   const navigate = useNavigate()
 
@@ -29,6 +32,7 @@ const LoginPage = () => {
       inputState.id.value === process.env.REACT_APP_ADMIN_ID &&
       inputState.pw.value === process.env.REACT_APP_ADMIN_PW
     ) {
+      setIsLoggedIn(true)
       navigate('/')
       return
     }

@@ -5,14 +5,20 @@ import styles from './button.module.scss'
 
 interface Props {
   children: ReactNode
-  size: 'extraLarge' | 'large' | 'normal' | 'small'
-  primary?: boolean
+  size: 'extraLarge' | 'large' | 'normal' | 'small' | 'xsmall'
   onClick?: MouseEventHandler
+  primary?: boolean
+  secondary?: boolean
+  type?: 'submit' | 'button'
 }
 
-const Button = ({ children, size, primary, onClick }: Props) => {
+const Button = ({ children, size, primary, secondary, onClick, type }: Props) => {
   return (
-    <button type='button' className={cx(styles.button, styles[size], { [styles.primary]: primary })} onClick={onClick}>
+    <button
+      type='button'
+      className={cx(styles.button, styles[size], { [styles.primary]: primary }, { [styles.secondary]: secondary })}
+      onClick={onClick}
+    >
       {children}
     </button>
   )

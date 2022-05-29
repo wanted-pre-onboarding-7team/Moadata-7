@@ -1,10 +1,11 @@
+import { ChangeEventHandler } from 'react'
 import styles from './input.module.scss'
 
 interface Prop {
   text: string
   id: string
   value: string | string[]
-  onChage?: () => void
+  onChage?: ChangeEventHandler
 }
 
 const Input = ({ text, id, value, onChage }: Prop) => {
@@ -25,7 +26,7 @@ const Input = ({ text, id, value, onChage }: Prop) => {
       <div className={styles.labelContainer}>
         <label htmlFor={id}>{text}</label>
       </div>
-      <input itemID={id} type='text' value={value} onChange={onChage} readOnly />
+      <input itemID={id} type='text' value={value} onChange={onChage} placeholder='전체' />
     </div>
   )
 }

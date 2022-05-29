@@ -13,11 +13,20 @@
   }
 
   input {
+    height: 34px;
     padding: 5px 10px;
     margin-right: 10px;
     margin-left: 12px;
     text-align: center;
     border: 1px solid colors.$BORDER;
     border-radius: 8px;
+
+    &::placeholder {
+      text-align: center;
+    }
+
+    &:focus::placeholder {
+      color: colors.$BG_G;
+    }
   }
 }

@@ -6,6 +6,7 @@ import { filteredListState, memberListState } from './state'
 import styles from './managePage.module.scss'
 
 import Button from 'components/Button'
+import Input from 'components/Input'
 
 const Search = () => {
   const [memberId, setMemberId] = useState('')

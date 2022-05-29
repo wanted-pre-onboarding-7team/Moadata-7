@@ -9,6 +9,7 @@ import { userInfoState } from './state'
 
 import SEO from 'components/SEO'
 import UserInfo from './UserInfo'
+import { useCheckLogin } from 'hooks'
 
 export const MEMBER_LIST = [
   { member_seq: '136', crt_ymdt: '2022-02-26 12:40:14', id: 'yhorong21' },
@@ -19,14 +20,17 @@ export const MEMBER_LIST = [
 const ManageDetailPage = () => {
   const setUserInfo = useSetRecoilState(userInfoState)
   const params = useParams()
+  const { loginCheck } = useCheckLogin()
   const user = MEMBER_LIST.filter((obj) => {
     return obj.member_seq === params.memberSeq
   })[0]
 
   const navigate = useNavigate()
+
   useMount(() => {
     navigate(`/member/manage/${params.memberSeq}`, { replace: true })
     setUserInfo(user)
+    loginCheck()
   })
 
   return (
@@ -41,9 +45,7 @@ const ManageDetailPage = () => {
       </nav>
       <h1 className={styles.title}> 회원 상세 정보</h1>
       <div className={styles.manageDetailContainer}>
-        <div className={styles.userContainer}>
-          <UserInfo />
-        </div>
+        <UserInfo />
         <StepChart />
       </div>
     </>

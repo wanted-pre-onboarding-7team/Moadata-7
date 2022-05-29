@@ -8,13 +8,13 @@
   height: 100vh;
   background: colors.$BG_G;
 
-  form {
+  .loginForm {
     @include flexbox.flexbox;
     flex-direction: column;
     width: 420px;
     letter-spacing: 0.5px;
 
-    h1 {
+    .loginTitle {
       margin-bottom: 8vh;
       font-size: 32px;
       font-weight: 600;
@@ -46,7 +46,7 @@
     }
   }
 
-  svg {
+  .logo {
     width: 140px;
     height: 35px;
     margin-top: 15vh;

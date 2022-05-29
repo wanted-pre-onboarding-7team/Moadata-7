@@ -46,7 +46,7 @@ const LoginInput: FC<IProps> = ({ inputType, state, dispatch }) => {
       placeholder={placeholder}
       onChange={changeInputHandler}
       onBlur={blurInputHandler}
-      className={cx({ [styles.inputWarning]: state[inputType].warning })}
+      className={cx(styles.loginInput, { [styles.loginInput_warning]: state[inputType].warning })}
     />
   )
 }

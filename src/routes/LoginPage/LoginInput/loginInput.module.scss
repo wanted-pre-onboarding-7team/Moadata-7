@@ -1,6 +1,6 @@
 @use '/src/styles/constants/colors';
 
-input {
+.loginInput {
   width: 100%;
   height: 70px;
   padding: 20px 40px;
@@ -11,13 +11,13 @@ input {
   background: colors.$BG_WHITE;
   border-radius: 10px;
   box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 5%);
-}
 
-input::placeholder {
-  font-weight: 600;
-  color: colors.$TEXT_SECONDARY;
-}
+  &::placeholder {
+    font-weight: 600;
+    color: colors.$TEXT_SECONDARY;
+  }
 
-.inputWarning {
-  border: 1px solid colors.$TEXT_RED;
+  &_warning {
+    border: 1px solid colors.$TEXT_RED;
+  }
 }

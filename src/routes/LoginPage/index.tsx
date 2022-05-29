@@ -54,8 +54,8 @@ const LoginPage = () => {
   return (
     <div className={styles.loginPage}>
       <SEO title='로그인' />
-      <form>
-        <h1>백오피스</h1>
+      <form className={styles.loginForm}>
+        <h1 className={styles.loginTitle}>백오피스</h1>
         <LoginInput inputType='id' state={inputState} dispatch={dispatchInputState} />
         <div className={styles.guideWrapper}>
           <p className={cx(styles.guide, { [styles.warning]: inputState.id.warning })}>
@@ -72,7 +72,7 @@ const LoginPage = () => {
           로그인
         </Button>
       </form>
-      <MoaLogo />
+      <MoaLogo className={styles.logo} />
       <PopupPortal>{isOpenPopup && <Popup setIsOpenPopup={setIsOpenPopup} />}</PopupPortal>
     </div>
   )

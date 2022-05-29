@@ -1,19 +1,25 @@
-import { ChangeEvent, useState } from 'react'
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
+import { ChangeEvent, MouseEvent, useState } from 'react'
+import { useSetRecoilState, useResetRecoilState } from 'recoil'
+import dayjs from 'dayjs'
 
-import { filteredListState, memberListState } from './state'
+import { MEMBER_LIST, filteredListState } from './state'
 
 import styles from './managePage.module.scss'
 
 import Button from 'components/Button'
 import Input from 'components/Input'
 
-const Search = () => {
-  const [memberId, setMemberId] = useState('')
-  const [memberSeq, setMemberSeq] = useState('')
+const todayDate = dayjs().format('YYYY-MM-DD')
+const oneWeekDate = dayjs().subtract(7, 'day').format('YYYY-MM-DD')
+const baseDate = dayjs().format('2022-02-26')
 
-  const memberList = useRecoilValue(memberListState)
-  const [, setFilteredList] = useRecoilState(filteredListState)
+const Search = () => {
+  const [memberId, setMemberId] = useState<string>('')
+  const [memberSeq, setMemberSeq] = useState<string>('')
+  const [startDate, setStartDate] = useState<string>('')
+  const [endDate, setEndDate] = useState<string>('')
+
+  const setFilteredList = useSetRecoilState(filteredListState)
   const resetFilteredList = useResetRecoilState(filteredListState)
 
   const handleIdChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,14 +30,41 @@ const Search = () => {
     setMemberSeq(e.currentTarget.value)
   }
 
+  const handleSelectDate = (event: MouseEvent<HTMLButtonElement>) => {
+    const { innerText } = event.currentTarget
+
+    if (innerText === '오늘') {
+      setStartDate(todayDate)
+      setEndDate(todayDate)
+    }
+
+    if (innerText === '1주일') {
+      setStartDate(oneWeekDate)
+      setEndDate(todayDate)
+    }
+
+    if (innerText === '전체') {
+      setStartDate(baseDate)
+      setEndDate(todayDate)
+    }
+  }
+
+  const handleResetClick = () => {
+    setMemberId('')
+    setMemberSeq('')
+    setStartDate('')
+    setEndDate('')
+    resetFilteredList()
+  }
+
   const handleSearchClick = () => {
-    if (!memberId && !memberSeq) {
+    if (!memberId && !memberSeq && !startDate && !endDate) {
       resetFilteredList()
 
       return
     }
 
-    let filteredList = memberList
+    let filteredList = MEMBER_LIST
 
     if (memberId) {
       filteredList = filteredList.filter((member) => member.id.toLowerCase().includes(memberId.toLowerCase()))
@@ -41,41 +74,36 @@ const Search = () => {
       filteredList = filteredList.filter((member) => member.member_seq === memberSeq)
     }
 
-    setFilteredList(filteredList)
-  }
+    if (startDate && endDate) {
+      filteredList = filteredList.filter((member) => {
+        const memberDate = dayjs(member.crt_ymdt).format('YYYY-MM-DD')
 
-  const handleResetClick = () => {
-    setMemberId('')
-    setMemberSeq('')
-    resetFilteredList()
+        return memberDate >= startDate && memberDate <= endDate
+      })
+    }
+
+    setFilteredList(filteredList)
   }
 
   return (
     <div className={styles.search}>
       <div className={styles.member}>
-        <label>
-          로그인 ID
-          <input type='text' value={memberId} placeholder='전체' onChange={handleIdChange} />
-        </label>
-        <label>
-          회원번호
-          <input type='text' value={memberSeq} placeholder='전체' onChange={handleSeqChange} />
-        </label>
+        <div className={styles.login}>
+          <Input value={memberId} onChage={handleIdChange} id='1' text='로그인 ID' placeholder='전체' />
+        </div>
+        <div className={styles.memberNum}>
+          <Input value={memberSeq} onChage={handleSeqChange} id='2' text='회원번호' placeholder='전체' />
+        </div>
       </div>
       <div className={styles.period}>
-        <label>
-          조회기간
-          <input type='text' className={styles.periodInput} placeholder='전체' disabled />
-          <span> ~ </span>
-          <input type='text' className={styles.periodInput} placeholder='전체' disabled />
-        </label>
-        <Button size='small' primary>
+        <Input value={[startDate, endDate]} id='3' text='조회기간' placeholder='전체' />
+        <Button size='small' primary onClick={handleSelectDate}>
           오늘
         </Button>
-        <Button size='small' primary>
+        <Button size='small' primary onClick={handleSelectDate}>
           1주일
         </Button>
-        <Button size='small' primary>
+        <Button size='small' primary onClick={handleSelectDate}>
           전체
         </Button>
       </div>

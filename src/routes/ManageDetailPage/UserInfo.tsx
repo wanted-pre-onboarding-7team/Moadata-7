@@ -9,8 +9,8 @@ const UserInfo = () => {
   return (
     <div className={styles.userInfoContainer}>
       <div className={styles.userInfo}>
-        <Input text='로그인 ID' id='1' value={userInfo.id} />
-        <Input text='회원 번호' id='2' value={userInfo.member_seq} />
+        <Input text='로그인 ID' id='1' value={userInfo.id} readonly />
+        <Input text='회원 번호' id='2' value={userInfo.member_seq} readonly />
       </div>
       <div>
         <Input text='가입일시' id='3' value={userInfo.crt_ymdt} />

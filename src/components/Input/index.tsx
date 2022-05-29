@@ -6,18 +6,20 @@ interface Prop {
   id: string
   value: string | string[]
   onChage?: ChangeEventHandler
+  placeholder?: string
+  readonly?: boolean
 }
 
-const Input = ({ text, id, value, onChage }: Prop) => {
+const Input = ({ text, id, value, onChage, placeholder, readonly }: Prop) => {
   if (Array.isArray(value))
     return (
       <div className={styles.inputBox}>
         <div className={styles.labelContainer}>
           <label htmlFor={id}>{text}</label>
         </div>
-        <input itemID={id} type='text' value={value[0]} readOnly />
+        <input itemID={id} type='text' value={value[0]} readOnly placeholder={placeholder} />
         <span> ~ </span>
-        <input itemID={id} type='text' value={value[1]} readOnly />
+        <input itemID={id} type='text' value={value[1]} readOnly placeholder={placeholder} />
       </div>
     )
 
@@ -26,7 +28,11 @@ const Input = ({ text, id, value, onChage }: Prop) => {
       <div className={styles.labelContainer}>
         <label htmlFor={id}>{text}</label>
       </div>
-      <input itemID={id} type='text' value={value} onChange={onChage} placeholder='전체' />
+      {readonly ? (
+        <input itemID={id} type='text' defaultValue={value} placeholder={placeholder} readOnly />
+      ) : (
+        <input itemID={id} type='text' defaultValue={value} onChange={onChage} placeholder={placeholder} />
+      )}
     </div>
   )
 }

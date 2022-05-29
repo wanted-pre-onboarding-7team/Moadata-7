@@ -16,35 +16,24 @@
 .search {
   @include container.container;
 
-  label {
-    position: relative;
-    height: 30px;
-    line-height: 30px;
-  }
-
-  input {
-    height: 100%;
-    padding: 5px;
-    margin-left: 12px;
-    text-align: center;
-    border: 1px solid colors.$BORDER;
-    border-radius: 8px;
-  }
-
-  div {
-    margin-bottom: 40px;
-  }
-
   .member {
     display: flex;
+    margin-bottom: 40px;
 
-    label {
+    .login {
+      flex-grow: 1;
+    }
+
+    .memberNum {
       flex-grow: 1;
     }
   }
 
   .period {
+    display: flex;
+
     button {
+      margin-top: 8px;
       margin-left: 6px;
     }
 
@@ -55,6 +44,7 @@
     input:last-of-type {
       margin: 0;
     }
+    margin-bottom: 40px;
   }
 
   .searchButtons {

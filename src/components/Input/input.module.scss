@@ -2,6 +2,7 @@
 
 .inputBox {
   display: flex;
+  height: 40px;
 
   .labelContainer {
     min-width: 60px;
@@ -15,7 +16,7 @@
   input {
     height: 34px;
     padding: 5px 10px;
-    margin-right: 10px;
+    margin-right: 12px;
     margin-left: 12px;
     text-align: center;
     border: 1px solid colors.$BORDER;
@@ -28,5 +29,10 @@
     &:focus::placeholder {
       color: colors.$BG_G;
     }
+  }
+
+  span {
+    width: 16px;
+    line-height: 32px;
   }
 }

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, MouseEventHandler } from 'react'
 import cx from 'classnames'
 
 import styles from './button.module.scss'
@@ -7,7 +7,7 @@ interface Props {
   children: ReactNode
   size: 'bigLarge' | 'large' | 'nomal' | 'small'
   primary?: boolean
-  onClick?: () => void
+  onClick?: MouseEventHandler
 }
 
 const Button = ({ children, size, primary, onClick }: Props) => {

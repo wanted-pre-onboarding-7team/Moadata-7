@@ -1,0 +1,33 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.heartRate {
+  width: 540px;
+
+  .chartWrap {
+    margin-bottom: 20px;
+    background-color: colors.$BLACK;
+    border-radius: 12px;
+  }
+
+  .rangeWrap {
+    padding: 24px;
+    background-color: colors.$BG_ASIDE;
+    border-radius: 12px;
+  }
+
+  dl {
+    display: flex;
+    justify-content: space-between;
+    padding: 12 20px;
+    margin-bottom: 30px;
+  }
+
+  .buttonsWrap {
+    @include flexbox.flexbox('end');
+
+    * {
+      margin-left: 4px;
+    }
+  }
+}

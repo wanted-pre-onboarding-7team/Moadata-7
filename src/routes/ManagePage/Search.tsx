@@ -71,7 +71,7 @@ const Search = () => {
     }
 
     if (memberSeq) {
-      filteredList = filteredList.filter((member) => member.member_seq === memberSeq)
+      filteredList = filteredList.filter((member) => member.member_seq.includes(memberSeq))
     }
 
     if (startDate && endDate) {

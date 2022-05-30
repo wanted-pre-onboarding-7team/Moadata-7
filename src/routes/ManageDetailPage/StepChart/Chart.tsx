@@ -1,12 +1,14 @@
 import React from 'react'
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryLabel, VictoryTheme, VictoryTooltip } from 'victory'
+import { changeDateFormat } from '../HeartRate/utils'
 import { IData, IStepDB, IStepList } from './type'
 
 interface IProps {
   StepDataList: IStepList[]
+  selectRange: string
 }
 
-const Chart = ({ StepDataList }: IProps) => {
+const Chart = ({ StepDataList, selectRange }: IProps) => {
   if (!StepDataList) return null
   return (
     <VictoryChart theme={VictoryTheme.material} width={450}>
@@ -23,7 +25,7 @@ const Chart = ({ StepDataList }: IProps) => {
         }}
         tickLabelComponent={<VictoryLabel dy={20} />}
       />
-      <VictoryAxis tickCount={10} />
+      <VictoryAxis tickCount={7} tickFormat={(x) => changeDateFormat(x, selectRange)} />
       <VictoryBar
         style={{
           data: { fill: ({ datum }) => (datum.index === StepDataList.length - 1 ? '#C5C5CC' : '#F84B0B') },

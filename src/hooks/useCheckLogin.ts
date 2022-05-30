@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import store from 'store'
 import dayjs from 'dayjs'
@@ -6,7 +6,7 @@ import dayjs from 'dayjs'
 const useCheckLogin = () => {
   const navigate = useNavigate()
   const loginInfo = store.get('login')
-  let userId
+
   const loginCheck = useCallback(() => {
     if (loginInfo === undefined) {
       navigate('/login')
@@ -21,9 +21,10 @@ const useCheckLogin = () => {
     navigate('/login')
   }, [navigate])
 
-  if (!loginInfo === undefined) {
-    userId = loginInfo.id
-  }
+  const userId = useMemo(() => {
+    if (loginInfo === undefined) return null
+    return loginInfo.id
+  }, [loginInfo])
 
   return { loginCheck, logOut, userId }
 }

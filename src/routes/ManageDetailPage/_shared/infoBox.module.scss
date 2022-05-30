@@ -1,0 +1,29 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.infoBox {
+  padding: 24px;
+  margin: 0 40px;
+  background-color: colors.$BG_ASIDE;
+  border-radius: 12px;
+
+  dl {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12 20px;
+    margin-bottom: 30px;
+
+    div {
+      @include flexbox.flexbox('between');
+    }
+  }
+
+  .buttonsWrap {
+    @include flexbox.flexbox('end');
+
+    * {
+      margin-left: 6px;
+    }
+  }
+}

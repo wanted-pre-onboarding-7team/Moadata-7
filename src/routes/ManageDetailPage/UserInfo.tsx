@@ -17,7 +17,7 @@ const UserInfo = () => {
         </div>
       </div>
       <div>
-        <Input text='가입일시' id='3' value={userInfo.crt_ymdt} />
+        <Input text='가입일시' id='3' value={userInfo.crt_ymdt} readonly />
       </div>
     </div>
   )

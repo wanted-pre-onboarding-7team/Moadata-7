@@ -32,10 +32,11 @@
     .userNumber {
       flex-grow: 1;
     }
-
   }
 }
 
 .chartContainer {
   display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
 }

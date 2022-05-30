@@ -9,21 +9,19 @@ import {
   VictoryCursorContainerProps,
 } from 'victory'
 
-import { getChartData, changeDateFormat } from '../utils'
-import { IUserInfo } from 'routes/ManageDetailPage/state'
+import { changeDateFormat } from '../utils'
 
 import { chartStyle, areaStyle, labelStyle, cursorLineStyle } from './chartStyle'
+import { IChartData } from '../type'
 
 interface IProps {
+  chartData: IChartData[] | null
   selectRange: string
-  userInfo: IUserInfo
 }
 
 const Y_AXIS_TICK_VALUES = [30, 60, 90, 120, 150, 180]
 
-const Chart = ({ selectRange, userInfo }: IProps) => {
-  const chartData = getChartData(selectRange, userInfo)
-
+const Chart = ({ chartData, selectRange }: IProps) => {
   const VictoryCursorVoronoiContainer = createContainer<VictoryVoronoiContainerProps, VictoryCursorContainerProps>(
     'voronoi',
     'cursor'
@@ -32,7 +30,7 @@ const Chart = ({ selectRange, userInfo }: IProps) => {
   if (!chartData) return null
   return (
     <VictoryChart
-      style={{ background: { backgroundColor: 'yellow' } }}
+      style={{ background: { backgroundColor: 'red' } }}
       {...chartStyle.size}
       theme={chartStyle.theme}
       containerComponent={
@@ -45,7 +43,7 @@ const Chart = ({ selectRange, userInfo }: IProps) => {
     >
       <VictoryLabel text='BPM' {...labelStyle.position} style={labelStyle.style} />
       <VictoryArea data={chartData} interpolation='natural' animate={areaStyle.animation} />
-      <VictoryAxis tickCount={7} tickFormat={(x) => changeDateFormat(x, selectRange)} />
+      <VictoryAxis tickCount={6} tickFormat={(x) => changeDateFormat(x, selectRange)} />
       <VictoryAxis dependentAxis tickValues={Y_AXIS_TICK_VALUES} />
     </VictoryChart>
   )

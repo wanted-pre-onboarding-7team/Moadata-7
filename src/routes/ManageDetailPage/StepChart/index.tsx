@@ -49,6 +49,7 @@ const StepChart = () => {
 
   return (
     <div className={styles.chartWrap}>
+      <h2>걸음수</h2>
       <Chart StepDataList={StepDataList} />
 
       <RangeDate onClick={onClick} startDay={startDay} endDay={endDay} />

@@ -39,7 +39,7 @@ const getAverageBPM = (select: string, userInfo: IUserInfo) => {
   const sumBPM = Number(chartData.reduce((sum, cur) => sum + cur.y, 0))
   const averageBPM = Math.floor(sumBPM / chartData.length)
 
-  return averageBPM
+  return `${averageBPM} BPM`
 }
 
 const changeDateFormat = (dateValue: string, select: string) => {

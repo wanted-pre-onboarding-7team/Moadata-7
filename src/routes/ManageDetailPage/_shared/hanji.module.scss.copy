@@ -35,7 +35,8 @@
       }
 
       .periodBox {
-        @include flexbox.flexbox;
+        display: flex;
+        flex-direction: row;
         margin-bottom: 10px;
 
         dd {
@@ -52,35 +53,38 @@
     }
   }
 
-  .buttonsBackground {
+  .buttonsWrapTest {
     @include flexbox.flexbox('end');
     position: absolute;
     top: 0;
     right: 24px;
-    padding: 5px 10px;
-    background: colors.$BG_G;
-    border-radius: 5px;
+
+    .buttonsBackground {
+      padding: 5px 10px;
+      background: colors.$BG_G;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 55px;
+      padding: 5px 0;
+      color: colors.$TEXT_SECONDARY;
+      border-radius: 5px;
+    }
+
+    .startButton,
+    .weekButton,
+    .allButton {
+      color: colors.$TEXT_WHITE;
+      background: colors.$TEXT_PURPLE;
+    }
   }
 
-  button {
-    width: 55px;
-    padding: 5px 0;
-    color: colors.$TEXT_SECONDARY;
-    border-radius: 5px;
-  }
+  .buttonsWrap {
+    @include flexbox.flexbox('end');
 
-  .startButton,
-  .weekButton,
-  .allButton {
-    color: colors.$TEXT_WHITE;
-    background: colors.$TEXT_PURPLE;
-  }
-}
-
-.buttonsWrap {
-  @include flexbox.flexbox('end');
-
-  * {
-    margin-left: 4px;
+    * {
+      margin-left: 4px;
+    }
   }
 }

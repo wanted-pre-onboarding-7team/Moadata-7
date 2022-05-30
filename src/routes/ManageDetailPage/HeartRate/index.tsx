@@ -9,7 +9,7 @@ import Chart from './HeartRateChart/Chart'
 import InfoBox from '../_shared/infoBox'
 
 const HeartBeat = () => {
-  const [selectRange, setSelectRange] = useState<string>('시작일')
+  const [selectRange, setSelectRange] = useState<string>('전체')
   const userInfo = useRecoilValue(userInfoState)
 
   const dateRange = getDateRange(selectRange, userInfo)

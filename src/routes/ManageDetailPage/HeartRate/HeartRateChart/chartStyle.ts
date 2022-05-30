@@ -1,10 +1,10 @@
 const COLORS = {
   AREA: 'rgba(245,73,16,0.1)',
-  AREA_LINE: '#f54910',
+  AREA_LINE: '#5539f1',
   AXIS: '#383838',
   LABEL: '#f54910',
   TICK_LABEL: '#b0b0b0',
-  VORONOI_LABEL: '#fefefe',
+  VORONOI_LABEL: '#eee',
   CURSOR_LINE: 'red',
 }
 
@@ -14,13 +14,13 @@ const chartStyle = {
   theme: {
     area: {
       style: {
-        data: { fill: COLORS.AREA, stroke: COLORS.AREA_LINE },
+        data: { fill: 'url(#gradient)', stroke: COLORS.AREA_LINE },
       },
     },
     axis: {
       style: {
         tickLabels: {
-          fill: COLORS.TICK_LABEL,
+          // fill: COLORS.TICK_LABEL,
           padding: 8,
         },
         grid: { stroke: 'none' },

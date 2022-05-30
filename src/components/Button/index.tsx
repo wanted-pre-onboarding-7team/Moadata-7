@@ -11,13 +11,20 @@ interface Props {
   secondary?: boolean
   type?: 'submit' | 'button'
   dataMemberSeq?: string
+  isActive?: boolean
 }
 
-const Button = ({ children, size, primary, secondary, onClick, type, dataMemberSeq }: Props) => {
+const Button = ({ children, size, primary, secondary, onClick, type, dataMemberSeq, isActive }: Props) => {
   return (
     <button
       type={type === 'submit' ? 'submit' : 'button'}
-      className={cx(styles.button, styles[size], { [styles.primary]: primary }, { [styles.secondary]: secondary })}
+      className={cx(
+        styles.button,
+        styles[size],
+        { [styles.primary]: primary },
+        { [styles.secondary]: secondary },
+        { [styles.isActive]: isActive }
+      )}
       onClick={onClick}
       data-member-seq={dataMemberSeq}
     >

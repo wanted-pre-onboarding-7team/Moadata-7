@@ -29,23 +29,34 @@ const Chart = ({ chartData, selectRange }: IProps) => {
 
   if (!chartData) return null
   return (
-    <VictoryChart
-      style={{ background: { backgroundColor: 'red' } }}
-      {...chartStyle.size}
-      theme={chartStyle.theme}
-      containerComponent={
-        <VictoryCursorVoronoiContainer
-          labels={({ datum }) => `${datum.y} BPM`}
-          cursorComponent={<Line style={cursorLineStyle.style} />}
-          cursorDimension='x'
-        />
-      }
-    >
-      <VictoryLabel text='BPM' {...labelStyle.position} style={labelStyle.style} />
-      <VictoryArea data={chartData} interpolation='natural' animate={areaStyle.animation} />
-      <VictoryAxis tickCount={6} tickFormat={(x) => changeDateFormat(x, selectRange)} />
-      <VictoryAxis dependentAxis tickValues={Y_AXIS_TICK_VALUES} />
-    </VictoryChart>
+    <div>
+      <svg style={{ position: 'absolute' }}>
+        <defs>
+          <linearGradient id='gradient' x1='50%' y1='0%' x2='50%' y2='100%'>
+            <stop offset='0%' stopColor='#5539f1' />
+            <stop offset='50%' stopColor='#5539f1' />
+            <stop offset='100%' stopColor='#fff' />
+          </linearGradient>
+        </defs>
+      </svg>
+      <VictoryChart
+        style={{ background: { backgroundColor: 'red' } }}
+        {...chartStyle.size}
+        theme={chartStyle.theme}
+        containerComponent={
+          <VictoryCursorVoronoiContainer
+            labels={({ datum }) => `${datum.y} BPM`}
+            cursorComponent={<Line style={cursorLineStyle.style} />}
+            cursorDimension='x'
+          />
+        }
+      >
+        <VictoryLabel text='BPM' {...labelStyle.position} style={labelStyle.style} />
+        <VictoryArea data={chartData} interpolation='natural' animate={areaStyle.animation} />
+        <VictoryAxis tickCount={6} tickFormat={(x) => changeDateFormat(x, selectRange)} />
+        <VictoryAxis dependentAxis tickValues={Y_AXIS_TICK_VALUES} />
+      </VictoryChart>
+    </div>
   )
 }
 

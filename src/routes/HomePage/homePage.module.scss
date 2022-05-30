@@ -11,4 +11,8 @@
 
 .homeContainer {
   @include container.container;
+
+  svg {
+    height: 640px;
+  }
 }

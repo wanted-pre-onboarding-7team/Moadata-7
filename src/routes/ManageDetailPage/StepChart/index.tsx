@@ -9,13 +9,15 @@ import { userInfoState } from '../state'
 import { useRecoilValue } from 'recoil'
 import Chart from './Chart'
 import RangeDate from './RangeDate'
+import { IData } from './type'
 
 dayjs.extend(isSameOrBefore)
 
 const StepChart = () => {
+  const [endDay, setEndDay] = useState(dayjs().format('YYYY-MM-DD'))
+  const [selectRange, setSelectRange] = useState<string>('시작일')
   const userInfo = useRecoilValue(userInfoState)
   const startDay = dayjs(userInfo.crt_ymdt).format('YYYY-MM-DD')
-  const [endDay, setEndDay] = useState(dayjs().format('YYYY-MM-DD'))
 
   if (!userInfo.crt_ymdt) return null
 
@@ -31,11 +33,21 @@ const StepChart = () => {
 
     if (!endDayArray) return
 
+    setSelectRange(e.currentTarget.textContent)
     setEndDay(endDayArray)
   }
 
+  // .reduce((a: IData[], b) => {
+  //   const findDate = a.findIndex((i: any) => i.crt_ymdt === b.crt_ymdt)
+  //   if (findDate === -1) {
+  //     a.push(b)
+  //   } else {
+  //     new Date(a[findDate].crt_ymdt).getTime() < new Date(b.crt_ymdt).getTime() ? b.crt_ymdt : a.crt_ymdt
+  //   }
+  // }, [])
   const StepDataList = StepDB[`member${userInfo.member_seq}`]
     .filter((item) => {
+      // 시작일일땐 하루 다나오고 일주일이나 전체 일때는 날별로
       return dayjs(item.crt_ymdt.split(' ')[0]).isSameOrBefore(dayjs(endDay))
     })
     .sort((a, b) => new Date(a.crt_ymdt).getTime() - new Date(b.crt_ymdt).getTime())
@@ -46,12 +58,12 @@ const StepChart = () => {
         label: item.steps,
       }
     })
+  // 하루마다 제일 늦은 시간의 걸음수 출력
 
   return (
     <div className={styles.chartWrap}>
       <h2>걸음수</h2>
-      <Chart StepDataList={StepDataList} />
-
+      <Chart StepDataList={StepDataList} selectRange={selectRange} />
       <RangeDate onClick={onClick} startDay={startDay} endDay={endDay} />
     </div>
   )

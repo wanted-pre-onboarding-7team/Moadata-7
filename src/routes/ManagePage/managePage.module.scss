@@ -15,6 +15,7 @@
 
 .search {
   @include container.container;
+  margin-bottom: 60px;
 
   .member {
     display: flex;

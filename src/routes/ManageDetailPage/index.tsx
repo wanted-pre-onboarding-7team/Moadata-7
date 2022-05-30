@@ -35,11 +35,11 @@ const ManageDetailPage = () => {
     <>
       <SEO title='회원상세' />
       <nav className={styles.subNav}>
-        홈 &gt;
+        홈 &nbsp; &gt; &nbsp;
         <button type='button' onClick={() => navigate(-1)}>
-          회원관리
+          &nbsp; 회원관리
         </button>
-        &gt; 회원상세
+        &nbsp; &gt; &nbsp; 회원상세
       </nav>
       <h1 className={styles.title}> 회원 상세 정보</h1>
       <div className={styles.manageDetailContainer}>

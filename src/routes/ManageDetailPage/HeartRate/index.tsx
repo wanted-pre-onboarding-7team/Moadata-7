@@ -16,18 +16,23 @@ const HeartBeat = () => {
   const chartData = getChartData(selectRange, userInfo)
 
   const rangeData = { startDate: dateRange[0], lastDate: dateRange[1] }
-  const averageData = { title: '평균심박수', value: getAverageBPM(selectRange, userInfo) }
+  const averageData = getAverageBPM(selectRange, userInfo)
 
   const onClick = (e: MouseEvent<HTMLInputElement>) => {
-    if (!e.currentTarget.textContent) return
-    setSelectRange(e.currentTarget.textContent)
+    setSelectRange(e.currentTarget.name)
   }
 
   return (
     <section className={styles.heartRate}>
-      <h2>심박수</h2>
+      <div className={styles.topWrap}>
+        <h2>심박수</h2>
+        <div className={styles.averageWrap}>
+          <dt>평균</dt>
+          <dd>{averageData}</dd>
+        </div>
+      </div>
       <Chart chartData={chartData} selectRange={selectRange} />
-      <InfoBox averageData={averageData} dateRange={rangeData} onClick={onClick} />
+      <InfoBox dateRange={rangeData} onClick={onClick} />
     </section>
   )
 }

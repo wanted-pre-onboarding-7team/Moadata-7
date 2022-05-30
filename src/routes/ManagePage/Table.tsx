@@ -30,36 +30,38 @@ const Table = () => {
     )
 
   return (
-    <table className={styles.table}>
-      <colgroup>
-        <col width='15%' />
-        <col width='15%' />
-        <col width='15%' />
-        <col width='55%' />
-      </colgroup>
-      <thead>
-        <tr>
-          <th>회원번호</th>
-          <th>가입일</th>
-          <th>로그인ID</th>
-          <th>상세</th>
-        </tr>
-      </thead>
-      <tbody>
-        {filteredList.map((el) => (
-          <tr key={el.member_seq}>
-            <td>{el.member_seq}</td>
-            <td>{getDate(el.crt_ymdt)}</td>
-            <td>{el.id}</td>
-            <td>
-              <Button size='small' onClick={handleManageClick} dataMemberSeq={el.member_seq} primary>
-                관리
-              </Button>
-            </td>
+    <div className={styles.tableWrap}>
+      <table className={styles.table}>
+        <colgroup>
+          <col width='15%' />
+          <col width='15%' />
+          <col width='15%' />
+          <col width='55%' />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>회원번호</th>
+            <th>가입일</th>
+            <th>로그인ID</th>
+            <th>상세</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {filteredList.map((el) => (
+            <tr key={el.member_seq}>
+              <td>{el.member_seq}</td>
+              <td>{getDate(el.crt_ymdt)}</td>
+              <td>{el.id}</td>
+              <td>
+                <Button size='normal' onClick={handleManageClick} dataMemberSeq={el.member_seq}>
+                  관리
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 export default Table

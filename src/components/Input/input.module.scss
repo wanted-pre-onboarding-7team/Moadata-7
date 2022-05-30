@@ -2,22 +2,23 @@
 
 .inputBox {
   display: flex;
-  height: 40px;
+  align-items: center;
+  height: 50px;
 
   .labelContainer {
     min-width: 60px;
 
     label {
-      height: 30px;
+      height: 50px;
+      font-weight: 600;
       line-height: 30px;
     }
   }
 
   input {
-    height: 34px;
-    padding: 5px 10px;
-    margin-right: 12px;
-    margin-left: 12px;
+    height: 50px;
+    padding: 0 20px;
+    margin-left: 20px;
     text-align: center;
     border: 1px solid colors.$BORDER;
     border-radius: 8px;
@@ -32,7 +33,9 @@
   }
 
   span {
-    width: 16px;
+    width: 30px;
+    font-size: 25px;
     line-height: 32px;
+    text-align: center;
   }
 }

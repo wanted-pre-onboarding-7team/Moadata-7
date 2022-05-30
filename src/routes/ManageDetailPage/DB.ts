@@ -18,12 +18,55 @@ import StepData32 from 'assets/data/step_data/step_380_0418_3.json'
 import StepData33 from 'assets/data/step_data/step_380_0419_3.json'
 
 import { IHealthRateDB, IHeartRateData } from './HeartRate/type'
-import { IStepDB } from './StepChart/type'
+import { IData, IStepDB } from './StepChart/type'
 
-const StepDB: IStepDB = {
+const getLastStepData = (arr: IData[]) => {
+  const [data] = arr.sort((a, b) => b.seq - a.seq)
+  return data
+}
+
+const division = (arr: IData[], divide: number) => {
+  const newArray = arr.filter((i, idx) => idx % divide === 0)
+  return newArray
+}
+
+const DailyStepDB: IStepDB = {
   member136: [...StepData11, ...StepData12, ...StepData13],
   member328: [...StepData21, ...StepData22, ...StepData23],
   member380: [...StepData31, ...StepData32, ...StepData33],
+}
+
+const RangeStepDB: IStepDB = {
+  member136: [
+    ...division(StepData11, 3),
+    getLastStepData([...StepData11]),
+    ...division(StepData12, 3),
+    getLastStepData([...StepData12]),
+    ...division(StepData13, 3),
+    getLastStepData([...StepData13]),
+  ],
+  member328: [
+    ...division(StepData21, 3),
+    getLastStepData([...StepData21]),
+    ...division(StepData22, 3),
+    getLastStepData([...StepData22]),
+    ...division(StepData23, 3),
+    getLastStepData([...StepData23]),
+  ],
+  member380: [
+    ...division(StepData31, 3),
+    getLastStepData([...StepData31]),
+    ...division(StepData32, 3),
+    getLastStepData([...StepData32]),
+    ...division(StepData33, 3),
+    getLastStepData([...StepData33]),
+  ],
+}
+
+const totalStepData: IStepDB = {
+  member136: [getLastStepData([...StepData11]), getLastStepData([...StepData12]), getLastStepData([...StepData13])],
+  member328: [getLastStepData([...StepData21]), getLastStepData([...StepData22]), getLastStepData([...StepData23])],
+  member380: [getLastStepData([...StepData31]), getLastStepData([...StepData32]), getLastStepData([...StepData33])],
 }
 
 const sortByDate = (array: IHeartRateData[]) => {
@@ -38,4 +81,4 @@ const heartRateDB: IHealthRateDB = {
   member380: sortByDate([...HeartRateData31, ...HeartRateData32, ...HeartRateData33]),
 }
 
-export { heartRateDB, StepDB }
+export { heartRateDB, DailyStepDB, RangeStepDB, totalStepData }

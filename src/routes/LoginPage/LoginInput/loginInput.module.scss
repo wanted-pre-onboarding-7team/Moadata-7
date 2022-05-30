@@ -10,7 +10,7 @@
   letter-spacing: 0.5px;
   background: colors.$BG_WHITE;
   border-radius: 10px;
-  box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 5%);
+  box-shadow: rgba(0, 0, 0, 6%) 1.95px 1.95px 2.6px;
 
   &::placeholder {
     font-weight: 600;
@@ -18,6 +18,6 @@
   }
 
   &_warning {
-    border: 1px solid colors.$TEXT_RED;
+    border: 1px solid colors.$TEXT_PURPLE;
   }
 }

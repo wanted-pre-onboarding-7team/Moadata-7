@@ -23,7 +23,7 @@ const Header = () => {
         <ul className={styles.user}>
           <li>{userId}</li>
           <li>
-            <Button size='normal' onClick={logOut} primary>
+            <Button size='normal' onClick={logOut}>
               로그아웃
             </Button>
           </li>

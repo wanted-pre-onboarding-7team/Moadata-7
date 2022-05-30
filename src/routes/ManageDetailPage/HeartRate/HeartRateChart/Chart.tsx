@@ -32,15 +32,15 @@ const Chart = ({ chartData, selectRange }: IProps) => {
     <div>
       <svg style={{ position: 'absolute' }}>
         <defs>
-          <linearGradient id='gradient' x1='50%' y1='0%' x2='50%' y2='100%'>
-            <stop offset='0%' stopColor='#5539f1' />
-            <stop offset='50%' stopColor='#5539f1' />
-            <stop offset='100%' stopColor='#fff' />
+          <linearGradient id='gradient' x1='50%' y1='50%' x2='50%' y2='100%'>
+            <stop offset='0%' stopColor='#eeebff' />
+            <stop offset='30%' stopColor='#f9f8ff' />
+            <stop offset='95%' stopColor='#fff' />
           </linearGradient>
         </defs>
       </svg>
       <VictoryChart
-        style={{ background: { backgroundColor: 'red' } }}
+        domainPadding={7}
         {...chartStyle.size}
         theme={chartStyle.theme}
         containerComponent={

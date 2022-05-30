@@ -1,51 +1,58 @@
-import React from 'react'
-import { VictoryAxis, VictoryBar, VictoryChart, VictoryLabel, VictoryTheme, VictoryTooltip } from 'victory'
-import { labelStyle } from '../HeartRate/HeartRateChart/chartStyle'
+import {
+  createContainer,
+  Line,
+  VictoryAxis,
+  VictoryBar,
+  VictoryChart,
+  VictoryCursorContainerProps,
+  VictoryLabel,
+  VictoryVoronoiContainerProps,
+} from 'victory'
+import { cursorLineStyle, labelStyle, chartStyle, barStyle, axisStyle1, axisStyle2 } from './chartStyle'
 import { changeDateFormat } from '../HeartRate/utils'
-import { IData, IStepDB, IStepList } from './type'
+import { IStepList } from './type'
 
 interface IProps {
   StepDataList: IStepList[]
   selectRange: string
 }
 
+const Y_AXIS_TICK_VALUES = [3000, 6000, 9000, 12000, 15000, 18000]
+
 const Chart = ({ StepDataList, selectRange }: IProps) => {
+  const VictoryCursorVoronoiContainer = createContainer<VictoryVoronoiContainerProps, VictoryCursorContainerProps>(
+    'voronoi',
+    'cursor'
+  )
   if (!StepDataList) return null
   return (
-    <VictoryChart theme={VictoryTheme.material} width={540} height={340}>
-      <VictoryAxis
-        dependentAxis
-        offsetX={545}
-        tickFormat={(x) => {
-          return x.toLocaleString()
-        }}
-        tickCount={9}
+    <VictoryChart
+      domainPadding={7}
+      {...chartStyle.size}
+      theme={chartStyle.theme}
+      containerComponent={
+        <VictoryCursorVoronoiContainer
+          labels={({ datum }) => `${datum.y} STEP`}
+          cursorComponent={<Line style={cursorLineStyle.style} />}
+          cursorDimension='x'
+        />
+      }
+    >
+      <VictoryBar
+        data={StepDataList}
         style={{
-          axis: { stroke: 'transparent' },
-          tickLabels: {
-            fill: '#94A2AD',
-            top: '4px',
-          },
+          data: { fill: ({ datum }) => (datum.index === StepDataList.length - 1 ? '#fdbb2d' : '#21cc9e') },
         }}
-        tickLabelComponent={<VictoryLabel />}
-      />
-      <VictoryAxis
-        tickCount={4}
-        tickFormat={(x) => changeDateFormat(x, selectRange)}
-        style={{
-          tickLabels: {
-            padding: 3,
-            fill: '#b0b0b0',
-          },
-        }}
+        animate={barStyle.animate}
+        labelComponent={<VictoryLabel style={{ display: 'none' }} />}
       />
       <VictoryLabel text='STEP' {...labelStyle.position} style={labelStyle.style} />
-      <VictoryBar
-        style={{
-          data: { fill: ({ datum }) => (datum.index === StepDataList.length - 1 ? '#C5C5CC' : '#F84B0B') },
-        }}
-        labelComponent={<VictoryTooltip />}
-        data={StepDataList}
+      <VictoryAxis style={axisStyle1.style} dependentAxis tickValues={Y_AXIS_TICK_VALUES} />
+      <VictoryAxis
+        style={axisStyle2.style}
+        tickCount={4}
+        tickLabelComponent={<VictoryLabel dy={5} />}
+        tickFormat={(x) => changeDateFormat(x, selectRange)}
       />
     </VictoryChart>
   )

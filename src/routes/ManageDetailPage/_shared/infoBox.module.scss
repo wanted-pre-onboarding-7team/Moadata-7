@@ -1,69 +1,36 @@
 @use '/src/styles/constants/colors';
 @use '/src/styles/mixins/flexbox';
 @use '/src/styles/mixins/container';
+@use '/src/styles/mixins/position';
+@use '/src/styles/mixins/responsive';
 
-.heartRate {
-  @include container.container;
-  width: 540px;
-  height: 100%;
-  margin-top: 32px;
+.rangeWrap {
+  @include flexbox.columnFlexbox;
+  padding: 10px 24px;
+  margin-top: 24px;
+}
 
-  h2 {
-    margin: 10px 0;
-    font-weight: 600;
+.periodBox {
+  @include flexbox.flexbox;
+  margin-top: 12px;
+
+  dt {
+    margin-right: 12px;
   }
 
-  .chartWrap {
-    margin-bottom: 20px;
-    background-color: colors.$GRAY2;
-    border-radius: 12px;
+  dd {
+    color: colors.$TEXT_SECONDARY;
   }
+}
 
-  .rangeWrap {
-    position: relative;
-    padding: 10px 24px;
-
-    dl {
-      dt {
-        margin-bottom: 10px;
-        font-weight: 600;
-      }
-
-      dd {
-        margin-bottom: 10px;
-        color: colors.$TEXT_SECONDARY;
-      }
-
-      .periodBox {
-        @include flexbox.flexbox;
-        margin-bottom: 10px;
-
-        dd {
-          margin-left: 10px;
-          font-size: 14px;
-        }
-      }
-
-      .averageContent {
-        font-size: 20px;
-        font-weight: 600;
-        color: colors.$TEXT_PURPLE;
-      }
-    }
-  }
-
-  .buttonsBackground {
-    @include flexbox.flexbox('end');
-    position: absolute;
-    top: 0;
-    right: 24px;
-    padding: 5px 10px;
-    background: colors.$BG_G;
-    border-radius: 5px;
-  }
+.buttonsBackground {
+  @include position.relative(auto auto 8px);
+  padding: 4px;
+  background: colors.$BG_G;
+  border-radius: 5px;
 
   button {
-    width: 55px;
+    width: 72px;
     padding: 5px 0;
     color: colors.$TEXT_SECONDARY;
     border-radius: 5px;
@@ -74,13 +41,5 @@
   .allButton {
     color: colors.$TEXT_WHITE;
     background: colors.$TEXT_PURPLE;
-  }
-}
-
-.buttonsWrap {
-  @include flexbox.flexbox('end');
-
-  * {
-    margin-left: 4px;
   }
 }

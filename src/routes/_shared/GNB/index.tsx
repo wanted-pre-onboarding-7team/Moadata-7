@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import styles from './gnb.module.scss'
 import { cx } from 'styles'
 import { GNB_LIST } from 'model/gnb'
+// import { People, Home } from 'assets/svg'
 
 const GNB = () => {
   return (

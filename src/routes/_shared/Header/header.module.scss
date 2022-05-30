@@ -1,22 +1,27 @@
+@use '/src/styles/constants/colors';
+
 .header {
-  max-width: 1440px;
+  width: 100%;
   height: 56px;
   margin: 0 auto;
+  background: colors.$BG_ASIDE;
+  box-shadow: #0000000d 0 6px 24px 0, #00000014 0 0 0 1px;
 
   .wrapper {
     display: flex;
     justify-content: space-between;
-    max-width: 1440px;
   }
 
   .logo {
-    width: 120px;
-    margin-top: 4px;
-    margin-left: 30px;
+    width: 140px;
+    height: 50px;
+    margin-top: 2px;
+    margin-left: 6px;
     text-align: left;
 
     .moaLogo {
       width: 116px;
+      height: 50px;
     }
   }
 

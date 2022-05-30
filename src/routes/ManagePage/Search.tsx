@@ -88,30 +88,30 @@ const Search = () => {
   return (
     <div className={styles.search}>
       <div className={styles.member}>
-        <div className={styles.login}>
-          <Input value={memberId} onChage={handleIdChange} id='1' text='로그인 ID' placeholder='전체' />
-        </div>
-        <div className={styles.memberNum}>
-          <Input value={memberSeq} onChage={handleSeqChange} id='2' text='회원번호' placeholder='전체' />
-        </div>
-      </div>
-      <div className={styles.period}>
-        <Input value={[startDate, endDate]} id='3' text='조회기간' placeholder='전체' />
-        <Button size='small' primary onClick={handleSelectDate}>
-          오늘
-        </Button>
-        <Button size='small' primary onClick={handleSelectDate}>
-          1주일
-        </Button>
-        <Button size='small' primary onClick={handleSelectDate}>
-          전체
-        </Button>
-      </div>
-      <div className={styles.searchButtons}>
-        <Button size='normal' primary onClick={handleResetClick}>
+        <Input value={memberId} onChage={handleIdChange} id='1' text='로그인 ID' placeholder='전체' />
+        <Input value={memberSeq} onChage={handleSeqChange} id='2' text='회원번호' placeholder='전체' />
+        <Button size='large' onClick={handleResetClick}>
           필터 초기화
         </Button>
-        <Button size='normal' primary onClick={handleSearchClick}>
+      </div>
+      <div className={styles.period}>
+        <div className={styles.periodInput}>
+          <Input value={[startDate, endDate]} id='3' text='조회기간' placeholder='전체' />
+        </div>
+        <div className={styles.periodButton}>
+          <Button size='normal' onClick={handleSelectDate}>
+            오늘
+          </Button>
+          <Button size='normal' onClick={handleSelectDate}>
+            1주일
+          </Button>
+          <Button size='normal' onClick={handleSelectDate}>
+            전체
+          </Button>
+        </div>
+      </div>
+      <div className={styles.searchButtons}>
+        <Button size='large' primary onClick={handleSearchClick}>
           검색
         </Button>
       </div>

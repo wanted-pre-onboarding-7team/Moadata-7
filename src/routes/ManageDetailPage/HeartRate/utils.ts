@@ -44,8 +44,7 @@ const getAverageBPM = (select: string, userInfo: IUserInfo) => {
 
 const changeDateFormat = (dateValue: string, select: string) => {
   if (select === '시작일') return dateValue.split(' ')[1]
-
-  return dateValue.split(' ').join('\n').slice(0, -3)
+  return dayjs(dateValue).format('YYYY-MM-DD \n HH-MM')
 }
 
 export { getDateRange, getChartData, getAverageBPM, changeDateFormat }

@@ -76,3 +76,16 @@ tr {
   height: 50px;
   line-height: 50px;
 }
+
+.noResult {
+  @include container.container;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 215px;
+
+  svg {
+    width: 100px;
+    height: 100px;
+  }
+}

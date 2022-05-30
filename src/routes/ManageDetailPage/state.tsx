@@ -1,12 +1,12 @@
 import { atom } from 'recoil'
 
-interface userInfo {
+interface IUserInfo {
   member_seq: string
   crt_ymdt: string
   id: string
 }
 
-export const userInfoState = atom<userInfo>({
-  key: 'userInfo',
+export const userInfoState = atom<IUserInfo>({
+  key: '#userInfoState',
   default: { member_seq: '', crt_ymdt: '', id: '' },
 })

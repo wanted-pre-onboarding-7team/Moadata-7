@@ -7,6 +7,7 @@ import { NoResult } from 'assets/svg'
 import { filteredListState } from './state'
 
 import styles from './managePage.module.scss'
+import Button from 'components/Button'
 
 const getDate = (date: string) => dayjs(date).format('YYYY-MM-DD')
 
@@ -51,14 +52,9 @@ const Table = () => {
             <td>{getDate(el.crt_ymdt)}</td>
             <td>{el.id}</td>
             <td>
-              <button
-                type='button'
-                className={styles.detailManage}
-                data-member-seq={el.member_seq}
-                onClick={handleManageClick}
-              >
+              <Button size='small' onClick={handleManageClick} dataMemberSeq={el.member_seq} primary>
                 관리
-              </button>
+              </Button>
             </td>
           </tr>
         ))}

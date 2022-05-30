@@ -2,12 +2,13 @@ import { ChangeEvent, MouseEvent, useState } from 'react'
 import { useSetRecoilState, useResetRecoilState } from 'recoil'
 import dayjs from 'dayjs'
 
-import { MEMBER_LIST, filteredListState } from './state'
+import { filteredListState } from './state'
 
 import styles from './managePage.module.scss'
 
 import Button from 'components/Button'
 import Input from 'components/Input'
+import { MEMBER_LIST } from 'model'
 
 const todayDate = dayjs().format('YYYY-MM-DD')
 const oneWeekDate = dayjs().subtract(7, 'day').format('YYYY-MM-DD')

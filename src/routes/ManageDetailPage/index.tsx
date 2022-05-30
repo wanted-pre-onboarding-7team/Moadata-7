@@ -1,7 +1,4 @@
-import SEO from 'components/SEO'
-import HeartRate from './HeartRate'
 import styles from './manageDetailPage.module.scss'
-import StepChart from './StepChart'
 
 import { useParams, useNavigate } from 'react-router-dom'
 import { useMount } from 'react-use'
@@ -9,13 +6,12 @@ import { useMount } from 'react-use'
 import { useSetRecoilState } from 'recoil'
 import { userInfoState } from './state'
 
-import UserInfo from './UserInfo'
+import { MEMBER_LIST } from 'model'
 
-export const MEMBER_LIST = [
-  { member_seq: '136', crt_ymdt: '2022-02-26 12:40:14', id: 'yhorong21' },
-  { member_seq: '328', crt_ymdt: '2022-04-16 07:19:31', id: 'seoltosil95' },
-  { member_seq: '380', crt_ymdt: '2022-04-17 03:00:23', id: 'yujaemin92' },
-]
+import UserInfo from './UserInfo'
+import SEO from 'components/SEO'
+import HeartRate from './HeartRate'
+import StepChart from './StepChart'
 
 const ManageDetailPage = () => {
   const setUserInfo = useSetRecoilState(userInfoState)

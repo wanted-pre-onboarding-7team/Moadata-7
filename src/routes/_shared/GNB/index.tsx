@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import styles from './gnb.module.scss'
 import { cx } from 'styles'
-import { GNB_LIST } from 'model/gnb'
+import { GNB_LIST } from 'model'
 
 const GNB = () => {
   return (

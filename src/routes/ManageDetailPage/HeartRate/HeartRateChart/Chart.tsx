@@ -1,39 +1,47 @@
-import { log } from 'console'
 import {
   VictoryChart,
   VictoryArea,
   VictoryAxis,
   VictoryLabel,
-  VictoryCursorContainer,
   Line,
-  VictoryVoronoiContainer,
-  VictoryGroup,
   createContainer,
-  VictoryZoomContainerProps,
   VictoryVoronoiContainerProps,
+  VictoryCursorContainerProps,
 } from 'victory'
-import { chartStyle, labelStyle, areaStyle, cursorLineStyle } from './chartStyle'
-import { changeDateFormat, filterDataByRange, getChartData } from './utils'
+
+import { getChartData, changeDateFormat } from '../utils'
+import { IUserInfo } from 'routes/ManageDetailPage/state'
+
+import { chartStyle, areaStyle, labelStyle, cursorLineStyle } from './chartStyle'
 
 interface IProps {
   selectRange: string
+  userInfo: IUserInfo
 }
 
-const Y_AXIS_TICK_VALUES = [30, 60, 90, 120, 150]
+const Y_AXIS_TICK_VALUES = [30, 60, 90, 120, 150, 180]
 
-const Chart = ({ selectRange }: IProps) => {
-  const filteredDataByRange = filterDataByRange(selectRange)
-  const chartData = getChartData(filteredDataByRange)
-  const VictoryCursorVoronoiContainer = createContainer<VictoryZoomContainerProps, VictoryVoronoiContainerProps>(
-    'cursor',
-    'voronoi'
+const Chart = ({ selectRange, userInfo }: IProps) => {
+  const chartData = getChartData(selectRange, userInfo)
+
+  const VictoryCursorVoronoiContainer = createContainer<VictoryVoronoiContainerProps, VictoryCursorContainerProps>(
+    'voronoi',
+    'cursor'
   )
 
+  if (!chartData) return null
   return (
     <VictoryChart
+      style={{ background: { backgroundColor: 'yellow' } }}
       {...chartStyle.size}
       theme={chartStyle.theme}
-      containerComponent={<VictoryCursorVoronoiContainer labels={({ datum }) => datum.y} />}
+      containerComponent={
+        <VictoryCursorVoronoiContainer
+          labels={({ datum }) => `${datum.y} BPM`}
+          cursorComponent={<Line style={cursorLineStyle.style} />}
+          cursorDimension='x'
+        />
+      }
     >
       <VictoryLabel text='BPM' {...labelStyle.position} style={labelStyle.style} />
       <VictoryArea data={chartData} interpolation='natural' animate={areaStyle.animation} />
@@ -44,7 +52,3 @@ const Chart = ({ selectRange }: IProps) => {
 }
 
 export default Chart
-
-/* <VictoryVoronoiContainer labels={({ datum }) => `y: ${datum.y}`} /> */
-
-/* <VictoryCursorContainer cursorDimension='x' cursorComponent={<Line style={cursorLineStyle.style} />} /> */

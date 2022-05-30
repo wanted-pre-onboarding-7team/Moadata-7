@@ -46,7 +46,7 @@ const ManageDetailPage = () => {
           <UserInfo />
         </div>
         <HeartRate />
-        <StepChart />
+        {/* <StepChart /> */}
       </div>
     </>
   )

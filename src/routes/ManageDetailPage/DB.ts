@@ -8,12 +8,18 @@ import HeartRateData31 from 'assets/data/heartrate_data/heartrate_380_0417_3.jso
 import HeartRateData32 from 'assets/data/heartrate_data/heartrate_380_0418_3.json'
 import HeartRateData33 from 'assets/data/heartrate_data/heartrate_380_0419_3.json'
 
-import { IHealthRateDB } from './HeartRate/type'
+import { IHealthRateDB, IHeartRateData } from './HeartRate/type'
+
+const sortByDate = (array: IHeartRateData[]) => {
+  array.sort((a, b) => new Date(a.crt_ymdt).getTime() - new Date(b.crt_ymdt).getTime())
+
+  return array
+}
 
 const heartRateDB: IHealthRateDB = {
-  member136: [...HeartRateData11, ...HeartRateData12, ...HeartRateData13],
-  member328: [...HeartRateData21, ...HeartRateData22, ...HeartRateData23],
-  member380: [...HeartRateData31, ...HeartRateData32, ...HeartRateData33],
+  member136: sortByDate([...HeartRateData11, ...HeartRateData12, ...HeartRateData13]),
+  member328: sortByDate([...HeartRateData21, ...HeartRateData22, ...HeartRateData23]),
+  member380: sortByDate([...HeartRateData31, ...HeartRateData32, ...HeartRateData33]),
 }
 
 export { heartRateDB }

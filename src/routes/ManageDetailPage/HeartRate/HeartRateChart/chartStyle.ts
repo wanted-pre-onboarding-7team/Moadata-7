@@ -1,18 +1,20 @@
 const COLORS = {
-  BACKGROUND: 'rgba(245,73,16,0.1)',
-  LINE: '#f54910',
+  AREA: 'rgba(245,73,16,0.1)',
+  AREA_LINE: '#f54910',
   AXIS: '#383838',
-  AXIS_LABEL: '#f54910',
+  LABEL: '#f54910',
   TICK_LABEL: '#b0b0b0',
+  VORONOI_LABEL: '#fefefe',
+  CURSOR_LINE: 'red',
 }
 
 const chartStyle = {
-  size: { width: 640, height: 360 },
+  size: { width: 540, height: 340 },
 
   theme: {
     area: {
       style: {
-        data: { fill: COLORS.BACKGROUND, stroke: COLORS.LINE },
+        data: { fill: COLORS.AREA, stroke: COLORS.AREA_LINE },
       },
     },
     axis: {
@@ -28,8 +30,13 @@ const chartStyle = {
     voronoi: {
       style: {
         labels: {
-          padding: 5,
-          fill: COLORS.LINE,
+          padding: 15,
+          fill: COLORS.VORONOI_LABEL,
+          pointerEvents: 'none',
+        },
+        flyout: {
+          stroke: 'transparent',
+          fill: 'transparent',
           pointerEvents: 'none',
         },
       },
@@ -44,7 +51,7 @@ const labelStyle = {
   },
 
   style: {
-    fill: COLORS.AXIS_LABEL,
+    fill: COLORS.LABEL,
   },
 }
 
@@ -57,7 +64,7 @@ const areaStyle = {
 
 const cursorLineStyle = {
   style: {
-    stroke: 'red',
+    stroke: COLORS.CURSOR_LINE,
   },
 }
 

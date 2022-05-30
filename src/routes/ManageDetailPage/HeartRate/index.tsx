@@ -1,12 +1,18 @@
 import styles from './heartRate.module.scss'
-
 import { useState, MouseEvent } from 'react'
+import { useRecoilValue } from 'recoil'
+
+import { userInfoState } from '../state'
 
 import Chart from './HeartRateChart/Chart'
 import Button from 'components/Button'
+import { getAverageBPM, getDateRange } from './utils'
 
 const HeartBeat = () => {
   const [selectRange, setSelectRange] = useState<string>('시작일')
+  const userInfo = useRecoilValue(userInfoState)
+  const [startDate, lastDate] = getDateRange(selectRange, userInfo)
+  const averageBPM = getAverageBPM(selectRange, userInfo)
 
   const onClick = (e: MouseEvent<HTMLInputElement>) => {
     if (!e.currentTarget.textContent) return
@@ -15,23 +21,29 @@ const HeartBeat = () => {
 
   return (
     <section className={styles.heartRate}>
-      <div className={styles.chartWrap}>
-        <h2>심박수</h2>
-        <Chart selectRange={selectRange} />
-      </div>
+      <h2>심박수</h2>
+      <Chart selectRange={selectRange} userInfo={userInfo} />
       <div className={styles.rangeWrap}>
         <dl>
-          <dt>조회기간</dt>
-          <dd>2022.02.02 ~ 2022.02.02</dd>
+          <div>
+            <dt>평균 심박수</dt>
+            <dd>{averageBPM}BPM</dd>
+          </div>
+          <div>
+            <dt>조회기간</dt>
+            <dd>
+              {startDate} ~ {lastDate}
+            </dd>
+          </div>
         </dl>
         <div className={styles.buttonsWrap}>
-          <Button size='nomal' onClick={onClick}>
+          <Button size='normal' onClick={onClick}>
             시작일
           </Button>
-          <Button size='nomal' onClick={onClick}>
+          <Button size='normal' onClick={onClick}>
             일주일
           </Button>
-          <Button size='nomal' onClick={onClick}>
+          <Button size='normal' onClick={onClick}>
             전체
           </Button>
         </div>

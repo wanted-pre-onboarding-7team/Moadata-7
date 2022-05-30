@@ -1,6 +1,6 @@
 ## 1. 정돈 및 정렬된 UI 작업
 
-- [x] Data Cardheader, gnb을 Layout에 적용 시켜 공통된 레이아웃 제공 및 라우터 설정
+- [x] header, gnb을 Layout에 적용 시켜 공통된 레이아웃 제공 및 라우터 설정
 ```tsx
 const App = () => {
   return (
@@ -34,7 +34,7 @@ const App = () => {
           })}
 ```
 
-## 3. 회원관리 및 페이지 이동
+## 3. 회원 상세 페이지, 회원관리 및 페이지 이동 
 - [x] 특정 회원 정보 useParams으로 받은 후 recoil로 상태 관리 적용
 ```tsx
  const params = useParams()
@@ -53,19 +53,32 @@ const navigate = useNavigate()
   })
 ```
 
-- [x] 로그인 상태에 따라서 redirect 주기 (합친 후 적용)
-recoil로 로그인 상태를 관리 후 적용 그후 로그인 상태가 아니면 적용
+- [x] 로그인 상태에 따라서 redirect 주기 
+localStorage 로그인 상태를 관리  로그인 상태가 아니면 로그인 페이지로 리다이렉트
+만료 시간 지정 후 시간이 지나면 로그아웃(로컬스토리지 삭제) 처리 
 ```tsx
 const useCheckLogin = () => {
-  const IsLoggedIn = useRecoilValue(loggedInAtom)
   const navigate = useNavigate()
-
+  const loginInfo = store.get('login')
   const loginCheck = useCallback(() => {
-    if (!IsLoggedIn) {
+    if (loginInfo === undefined) {
       navigate('/login')
     }
-  }, [navigate, IsLoggedIn])
+    if (dayjs().isAfter(loginInfo.expire)) {
+      store.remove('login')
+      navigate('/login')
+    }
+  }, [loginInfo, navigate])
 
-  return { loginCheck }
+  const logOut = useCallback(() => {
+    store.remove('login')
+    navigate('/login')
+  }, [navigate])
+
+  return { loginCheck, logOut }
 }
+
 ```
+
+## 공통 컴포넌트 관리
+- [x] 버튼, input 같이 공용으로 사용 되는 컴포넌트 분리 및 적용

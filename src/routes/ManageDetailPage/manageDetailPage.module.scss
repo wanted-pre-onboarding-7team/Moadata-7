@@ -19,12 +19,23 @@
 }
 
 .userInfoContainer {
-  width: 813px;
   margin-bottom: 6px;
 
   .userInfo {
     display: flex;
-    justify-content: space-between;
     margin-bottom: 6px;
+
+    .login {
+      flex-grow: 1;
+    }
+
+    .userNumber {
+      flex-grow: 1;
+    }
+
   }
+}
+
+.chartContainer {
+  display: flex;
 }

@@ -44,8 +44,10 @@ const ManageDetailPage = () => {
       <h1 className={styles.title}> 회원 상세 정보</h1>
       <div className={styles.manageDetailContainer}>
         <UserInfo />
-        <HeartRate />
-        <StepChart />
+        <div className={styles.chartContainer}>
+          <HeartRate />
+          <StepChart />
+        </div>
       </div>
     </>
   )

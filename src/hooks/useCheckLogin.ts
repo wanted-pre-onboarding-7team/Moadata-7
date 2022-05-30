@@ -6,6 +6,7 @@ import dayjs from 'dayjs'
 const useCheckLogin = () => {
   const navigate = useNavigate()
   const loginInfo = store.get('login')
+  let userId
   const loginCheck = useCallback(() => {
     if (loginInfo === undefined) {
       navigate('/login')
@@ -20,7 +21,9 @@ const useCheckLogin = () => {
     navigate('/login')
   }, [navigate])
 
-  const userId = loginInfo.id
+  if (!loginInfo === undefined) {
+    userId = loginInfo.id
+  }
 
   return { loginCheck, logOut, userId }
 }

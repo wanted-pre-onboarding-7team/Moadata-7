@@ -6,11 +6,9 @@ import { useMount } from 'react-use'
 
 import { useSetRecoilState } from 'recoil'
 import { userInfoState } from './state'
-import store from 'store'
 
 import SEO from 'components/SEO'
 import UserInfo from './UserInfo'
-import { useCheckLogin } from 'hooks'
 
 export const MEMBER_LIST = [
   { member_seq: '136', crt_ymdt: '2022-02-26 12:40:14', id: 'yhorong21' },
@@ -21,7 +19,6 @@ export const MEMBER_LIST = [
 const ManageDetailPage = () => {
   const setUserInfo = useSetRecoilState(userInfoState)
   const params = useParams()
-  const { loginCheck } = useCheckLogin()
   const user = MEMBER_LIST.filter((obj) => {
     return obj.member_seq === params.memberSeq
   })[0]
@@ -31,7 +28,6 @@ const ManageDetailPage = () => {
   useMount(() => {
     navigate(`/member/manage/${params.memberSeq}`, { replace: true })
     setUserInfo(user)
-    loginCheck()
   })
 
   return (

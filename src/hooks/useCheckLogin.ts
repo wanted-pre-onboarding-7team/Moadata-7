@@ -9,8 +9,7 @@ const useCheckLogin = () => {
   const loginCheck = useCallback(() => {
     if (loginInfo === undefined) {
       navigate('/login')
-    }
-    if (dayjs().isAfter(loginInfo.expire)) {
+    } else if (dayjs().isAfter(loginInfo.expire)) {
       store.remove('login')
       navigate('/login')
     }

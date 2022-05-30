@@ -5,9 +5,13 @@ import { NavLink } from 'react-router-dom'
 
 import Button from 'components/Button'
 import { useCheckLogin } from 'hooks'
+import { useMount } from 'react-use'
 
 const Header = () => {
-  const { logOut } = useCheckLogin()
+  const { logOut, loginCheck } = useCheckLogin()
+  useMount(() => {
+    loginCheck()
+  })
   return (
     <div className={styles.header}>
       <div className={styles.wrapper}>

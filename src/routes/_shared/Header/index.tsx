@@ -8,7 +8,7 @@ import { useCheckLogin } from 'hooks'
 import { useMount } from 'react-use'
 
 const Header = () => {
-  const { logOut, loginCheck } = useCheckLogin()
+  const { logOut, loginCheck, userId } = useCheckLogin()
   useMount(() => {
     loginCheck()
   })
@@ -21,7 +21,7 @@ const Header = () => {
           </NavLink>
         </div>
         <ul className={styles.user}>
-          <li>moaAdmin</li>
+          <li>{userId}</li>
           <li>
             <Button size='normal' onClick={logOut} primary>
               로그아웃

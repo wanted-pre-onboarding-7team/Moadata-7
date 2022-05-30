@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react'
+import { FormEvent, useEffect, useReducer, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import store from 'store'
 import dayjs from 'dayjs'
@@ -24,14 +24,15 @@ const LoginPage = () => {
 
   const navigate = useNavigate()
 
-  const loginHandler = () => {
+  const loginHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     if (!isLoginActive) return
 
     if (
       inputState.id.value === process.env.REACT_APP_ADMIN_ID &&
       inputState.pw.value === process.env.REACT_APP_ADMIN_PW
     ) {
-      store.set('login', { isLoggedIn: true, expire: dayjs().add(7, 'hour') })
+      store.set('login', { isLoggedIn: true, expire: dayjs().add(7, 'hour'), id: inputState.id.value })
       navigate('/')
       return
     }
@@ -67,7 +68,7 @@ const LoginPage = () => {
             {inputState.pw.displayMessage ? errorMsgSet.pw : ''}
           </p>
         </div>
-        <Button size='extraLarge' primary={isLoginActive} onClick={loginHandler}>
+        <Button size='extraLarge' primary={isLoginActive} onClick={loginHandler} type='submit'>
           로그인
         </Button>
       </form>

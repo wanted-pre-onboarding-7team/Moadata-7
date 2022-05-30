@@ -1,3 +1,5 @@
+import SEO from 'components/SEO'
+import HeartRate from './HeartRate'
 import styles from './manageDetailPage.module.scss'
 import StepChart from './StepChart'
 
@@ -7,7 +9,6 @@ import { useMount } from 'react-use'
 import { useSetRecoilState } from 'recoil'
 import { userInfoState } from './state'
 
-import SEO from 'components/SEO'
 import UserInfo from './UserInfo'
 
 export const MEMBER_LIST = [
@@ -43,6 +44,7 @@ const ManageDetailPage = () => {
       <h1 className={styles.title}> 회원 상세 정보</h1>
       <div className={styles.manageDetailContainer}>
         <UserInfo />
+        <HeartRate />
         <StepChart />
       </div>
     </>

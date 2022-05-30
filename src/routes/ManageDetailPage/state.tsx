@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 
-interface IUserInfo {
+export interface IUserInfo {
   member_seq: string
   crt_ymdt: string
   id: string

@@ -1,12 +1,17 @@
 interface IHealthRateDB {
-  [key: string]: IData[]
+  [key: string]: IHeartRateData[]
 }
 
-interface IData {
+interface IHeartRateData {
   seq: number
   member_seq: number
   avg_beat: number
   crt_ymdt: string
 }
 
-export type { IHealthRateDB, IData }
+interface IChartData {
+  x: string
+  y: number
+}
+
+export type { IHealthRateDB, IHeartRateData, IChartData }

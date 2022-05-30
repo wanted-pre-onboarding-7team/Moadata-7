@@ -1,4 +1,5 @@
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useResetRecoilState } from 'recoil'
+import { useMount } from 'react-use'
 
 import { filteredListState } from './state'
 
@@ -10,6 +11,9 @@ import Table from './Table'
 
 const ManagePage = () => {
   const filteredList = useRecoilValue(filteredListState)
+  const resetFilteredList = useResetRecoilState(filteredListState)
+
+  useMount(() => resetFilteredList())
 
   return (
     <>
@@ -23,4 +27,5 @@ const ManagePage = () => {
     </>
   )
 }
+
 export default ManagePage

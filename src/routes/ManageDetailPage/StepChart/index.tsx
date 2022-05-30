@@ -14,17 +14,14 @@ dayjs.extend(isSameOrBefore)
 
 const StepChart = () => {
   const userInfo = useRecoilValue(userInfoState)
-  const startDay = dayjs(userInfo.crt_ymdt).format('YYYY-MM-DD')
   const [endDay, setEndDay] = useState(dayjs().format('YYYY-MM-DD'))
-
-  if (!userInfo.crt_ymdt) return null
 
   const onClick = (e: MouseEvent<HTMLInputElement>) => {
     if (!e.currentTarget.textContent) return
     const onClickText = e.currentTarget.textContent
 
     const endDayArray = {
-      시작일: startDay,
+      시작일: dayjs(userInfo.crt_ymdt).format('YYYY-MM-DD'),
       일주일: dayjs(userInfo.crt_ymdt).add(1, 'week').format('YYYY-MM-DD'),
       전체: dayjs().format('YYYY-MM-DD'),
     }[onClickText]
@@ -47,11 +44,12 @@ const StepChart = () => {
       }
     })
 
+  if (!userInfo.crt_ymdt) return null
   return (
     <div className={styles.chartWrap}>
       <Chart StepDataList={StepDataList} />
 
-      <RangeDate onClick={onClick} startDay={startDay} endDay={endDay} />
+      <RangeDate onClick={onClick} startDay={dayjs(userInfo.crt_ymdt).format('YYYY-MM-DD')} endDay={endDay} />
     </div>
   )
 }

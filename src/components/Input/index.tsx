@@ -29,9 +29,9 @@ const Input = ({ text, id, value, onChage, placeholder, readonly }: Prop) => {
         <label htmlFor={id}>{text}</label>
       </div>
       {readonly ? (
-        <input itemID={id} type='text' defaultValue={value} placeholder={placeholder} readOnly />
+        <input itemID={id} type='text' value={value} placeholder={placeholder} readOnly />
       ) : (
-        <input itemID={id} type='text' defaultValue={value} onChange={onChage} placeholder={placeholder} />
+        <input itemID={id} type='text' value={value} onChange={onChage} placeholder={placeholder} />
       )}
     </div>
   )

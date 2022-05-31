@@ -19,7 +19,6 @@
     height: 50px;
     padding: 0 20px;
     margin-left: 20px;
-    text-align: center;
     border: 1px solid colors.$BORDER;
     border-radius: 8px;
 
@@ -29,6 +28,7 @@
 
     &:focus::placeholder {
       color: colors.$BG_G;
+      text-align: left;
     }
   }
 

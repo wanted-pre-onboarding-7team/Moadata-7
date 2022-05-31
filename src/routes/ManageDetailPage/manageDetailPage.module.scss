@@ -5,7 +5,8 @@
   @include container.subNav;
 
   button {
-    all: unset;
+    height: 23px;
+    font-size: 16px;
     cursor: pointer;
   }
 }

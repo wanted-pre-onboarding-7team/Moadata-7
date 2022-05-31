@@ -15,27 +15,22 @@
 }
 
 .manageDetailContainer {
-  @include container.container;
-}
+  padding: 20px;
 
-.userInfoContainer {
-  margin-bottom: 6px;
-
-  .userInfo {
+  .chartContainer {
     display: flex;
-    margin-bottom: 6px;
+    margin-top: 32px;
 
-    .login {
+    section {
       flex-grow: 1;
     }
-
-    .userNumber {
-      flex-grow: 1;
-    }
-
   }
 }
 
-.chartContainer {
+.userInfoContainer {
+  @include container.container;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
 }

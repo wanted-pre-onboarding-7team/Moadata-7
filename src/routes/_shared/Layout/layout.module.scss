@@ -4,31 +4,35 @@
 .container {
   position: relative;
   display: flex;
-  width: 100vw;
-  max-width: 1440px;
-  min-height: 94vh;
+  width: 100%;
+  min-height: calc(100vh - 50px);
   margin: 0 auto;
+  background: colors.$BG_G;
 
   .aside {
-    position: relative;
+    position: fixed;
     top: 50px;
     z-index: levels.$GNB;
-    width: calc(100vw - 150px);
-    width: 150px;
     min-width: 150px;
+    height: 100%;
     padding: 0 20px;
     background: colors.$BG_ASIDE;
+    border-right: 1px solid colors.$BORDER;
   }
 
   .wrapper {
     position: relative;
     top: 50px;
-    width: calc(100vw - 150px);
+    width: 100%;
     min-width: 880px;
+    padding-left: 20px;
+    margin: 0 auto;
+    margin-left: 150px;
     background: colors.$BG_G;
   }
 
   .main {
+    max-width: 1160px;
     margin: 20px;
   }
 }

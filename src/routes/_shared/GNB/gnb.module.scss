@@ -35,14 +35,14 @@
 
       .isActive {
         position: relative;
-        color: colors.$TEXT_PRIMARY;
+        color: colors.$TEXT_PURPLE;
 
         .sideLine {
           position: absolute;
           left: 128px;
           width: 3px;
           height: 32px;
-          background-color: colors.$TEXT_PRIMARY;
+          background-color: colors.$TEXT_PURPLE;
           transition: 0.5s ease-in-out;
         }
       }

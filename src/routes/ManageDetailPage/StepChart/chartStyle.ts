@@ -1,22 +1,16 @@
 const COLORS = {
-  AREA: 'url(#gradient)',
-  AREA_LINE: '#8676ff',
+  AREA: 'rgba(245,73,16,0.1)',
   AXIS: '#383838',
-  LABEL: '#8676ff',
+  LABEL: '#21cc9e',
   TICK_LABEL: '#b0b0b0',
   VORONOI_LABEL: '#383838',
-  CURSOR_LINE: '#cfc8ff',
+  CURSOR_LINE: '#a0ffe5',
 }
 
 const chartStyle = {
   size: { width: 540, height: 340 },
 
   theme: {
-    area: {
-      style: {
-        data: { fill: COLORS.AREA, stroke: COLORS.AREA_LINE, strokeWidth: 1.5 },
-      },
-    },
     axis: {
       style: {
         tickLabels: {
@@ -30,10 +24,9 @@ const chartStyle = {
     voronoi: {
       style: {
         labels: {
-          padding: 15,
+          padding: 10,
           fill: COLORS.VORONOI_LABEL,
           pointerEvents: 'none',
-          fontWeight: 'bold',
         },
         flyout: {
           stroke: 'transparent',
@@ -45,23 +38,10 @@ const chartStyle = {
   },
 }
 
-const labelStyle = {
-  position: {
-    x: 16,
-    y: 18,
-  },
-
-  style: {
-    fill: COLORS.LABEL,
-    fontSize: '18px',
-    fontWeight: 'bold',
-  },
-}
-
-const areaStyle = {
-  animation: {
-    duration: 2000,
-    onLoad: { duration: 1500 },
+const barStyle = {
+  animate: {
+    duration: 1000,
+    onLoad: { duration: 500 },
   },
 }
 
@@ -73,4 +53,38 @@ const cursorLineStyle = {
   },
 }
 
-export { chartStyle, labelStyle, areaStyle, cursorLineStyle }
+const labelStyle = {
+  position: {
+    x: 10,
+    y: 18,
+  },
+  style: {
+    fill: COLORS.LABEL,
+    fontSize: '18px',
+    fontWeight: 'bold',
+  },
+}
+
+const axisStyle1 = {
+  style: {
+    tickLabels: {
+      fill: '#b0b0b0',
+      top: '1px',
+    },
+  },
+}
+
+const axisStyle2 = {
+  style: {
+    tickLabels: {
+      padding: 3,
+      fill: '#b0b0b0',
+    },
+    padding: {
+      top: 20,
+      bottom: 80,
+    },
+  },
+}
+
+export { chartStyle, labelStyle, cursorLineStyle, barStyle, axisStyle1, axisStyle2 }

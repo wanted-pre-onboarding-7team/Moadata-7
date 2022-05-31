@@ -10,5 +10,15 @@
 }
 
 .homeContainer {
-  @include container.container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 700px;
+
+  p {
+    margin-top: 30px;
+    font-weight: 300;
+    color: colors.$TEXT_SECONDARY;
+  }
 }

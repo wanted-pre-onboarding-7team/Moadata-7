@@ -1,6 +1,6 @@
-import React, { useState, MouseEvent, useEffect, useMemo } from 'react'
+import React, { useState, MouseEvent, useCallback } from 'react'
 
-import { StepDB } from '../DB'
+import { DailyStepDB, RangeStepDB, totalStepData } from '../DB'
 import styles from './stepChart.module.scss'
 import dayjs from 'dayjs'
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
@@ -8,17 +8,50 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import { userInfoState } from '../state'
 import { useRecoilValue } from 'recoil'
 import Chart from './Chart'
-import RangeDate from './RangeDate'
+import InfoBox from '../_shared/infoBox'
 
 dayjs.extend(isSameOrBefore)
 
 const StepChart = () => {
-  const userInfo = useRecoilValue(userInfoState)
   const [endDay, setEndDay] = useState(dayjs().format('YYYY-MM-DD'))
+  const [selectRange, setSelectRange] = useState<string>('전체')
+  const userInfo = useRecoilValue(userInfoState)
+  const startDay = dayjs(userInfo.crt_ymdt).format('YYYY-MM-DD')
+
+  const changeDB = useCallback(
+    (range: string) => {
+      const arr =
+        range === '시작일' ? DailyStepDB[`member${userInfo.member_seq}`] : RangeStepDB[`member${userInfo.member_seq}`]
+
+      return arr
+        .filter((v, i) => {
+          return dayjs(v.crt_ymdt.split(' ')[0]).isSameOrBefore(dayjs(endDay)) && arr.indexOf(v) === i
+        })
+        .sort((a, b) => new Date(a.crt_ymdt).getTime() - new Date(b.crt_ymdt).getTime())
+        .map((item, idx) => {
+          return {
+            x: item.crt_ymdt,
+            y: item.steps,
+            label: item.steps,
+            index: idx,
+          }
+        })
+    },
+    [endDay, userInfo.member_seq]
+  )
+
+  if (!userInfo.crt_ymdt) return null
+
+  const totalStep = totalStepData[`member${userInfo.member_seq}`]
+    .filter((item) => {
+      return dayjs(item.crt_ymdt.split(' ')[0]).isSameOrBefore(dayjs(endDay))
+    })
+    .reduce((a, b) => {
+      return a + b.steps
+    }, 0)
 
   const onClick = (e: MouseEvent<HTMLInputElement>) => {
-    if (!e.currentTarget.textContent) return
-    const onClickText = e.currentTarget.textContent
+    const onClickText = e.currentTarget.name
 
     const endDayArray = {
       시작일: dayjs(userInfo.crt_ymdt).format('YYYY-MM-DD'),
@@ -28,29 +61,25 @@ const StepChart = () => {
 
     if (!endDayArray) return
 
+    setSelectRange(e.currentTarget.name)
     setEndDay(endDayArray)
+    if (!e.currentTarget.textContent) return
+    changeDB(e.currentTarget.textContent)
   }
 
-  const StepDataList = StepDB[`member${userInfo.member_seq}`]
-    .filter((item) => {
-      return dayjs(item.crt_ymdt.split(' ')[0]).isSameOrBefore(dayjs(endDay))
-    })
-    .sort((a, b) => new Date(a.crt_ymdt).getTime() - new Date(b.crt_ymdt).getTime())
-    .map((item) => {
-      return {
-        x: item.crt_ymdt,
-        y: item.steps,
-        label: item.steps,
-      }
-    })
-
-  if (!userInfo.crt_ymdt) return null
+  const rangeData = { startDate: startDay, lastDate: endDay }
   return (
-    <div className={styles.chartWrap}>
-      <Chart StepDataList={StepDataList} />
-
-      <RangeDate onClick={onClick} startDay={dayjs(userInfo.crt_ymdt).format('YYYY-MM-DD')} endDay={endDay} />
-    </div>
+    <section className={styles.chartWrap}>
+      <div className={styles.topWrap}>
+        <h2>걸음수</h2>
+        <div className={styles.averageWrap}>
+          <dt>총</dt>
+          <dd>{totalStep} 걸음</dd>
+        </div>
+      </div>
+      <Chart StepDataList={changeDB(selectRange)} selectRange={selectRange} />
+      <InfoBox dateRange={rangeData} onClick={onClick} />
+    </section>
   )
 }
 

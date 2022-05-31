@@ -3,51 +3,36 @@ import { useState, MouseEvent } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { userInfoState } from '../state'
+import { getAverageBPM, getChartData, getDateRange } from './utils'
 
 import Chart from './HeartRateChart/Chart'
-import Button from 'components/Button'
-import { getAverageBPM, getDateRange } from './utils'
+import InfoBox from '../_shared/infoBox'
 
 const HeartBeat = () => {
-  const [selectRange, setSelectRange] = useState<string>('시작일')
+  const [selectRange, setSelectRange] = useState<string>('전체')
   const userInfo = useRecoilValue(userInfoState)
-  const [startDate, lastDate] = getDateRange(selectRange, userInfo)
-  const averageBPM = getAverageBPM(selectRange, userInfo)
+
+  const dateRange = getDateRange(selectRange, userInfo)
+  const chartData = getChartData(selectRange, userInfo)
+
+  const rangeData = { startDate: dateRange[0], lastDate: dateRange[1] }
+  const averageData = getAverageBPM(selectRange, userInfo)
 
   const onClick = (e: MouseEvent<HTMLInputElement>) => {
-    if (!e.currentTarget.textContent) return
-    setSelectRange(e.currentTarget.textContent)
+    setSelectRange(e.currentTarget.name)
   }
 
   return (
     <section className={styles.heartRate}>
-      <h2>심박수</h2>
-      <Chart selectRange={selectRange} userInfo={userInfo} />
-      <div className={styles.rangeWrap}>
-        <dl>
-          <div>
-            <dt>평균 심박수</dt>
-            <dd>{averageBPM}BPM</dd>
-          </div>
-          <div>
-            <dt>조회기간</dt>
-            <dd>
-              {startDate} ~ {lastDate}
-            </dd>
-          </div>
-        </dl>
-        <div className={styles.buttonsWrap}>
-          <Button size='normal' onClick={onClick}>
-            시작일
-          </Button>
-          <Button size='normal' onClick={onClick}>
-            일주일
-          </Button>
-          <Button size='normal' onClick={onClick}>
-            전체
-          </Button>
+      <div className={styles.topWrap}>
+        <h2>심박수</h2>
+        <div className={styles.averageWrap}>
+          <dt>평균</dt>
+          <dd>{averageData}</dd>
         </div>
       </div>
+      <Chart chartData={chartData} selectRange={selectRange} />
+      <InfoBox dateRange={rangeData} onClick={onClick} />
     </section>
   )
 }

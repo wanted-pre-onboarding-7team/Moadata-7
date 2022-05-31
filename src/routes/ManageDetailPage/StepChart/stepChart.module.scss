@@ -1,3 +1,36 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
 .chartWrap {
-  width: 50%;
+  width: 560px;
+  max-width: 560px;
+  height: 100%;
+  padding: 32px;
+  background: white;
+  border-radius: 12px;
+
+  .topWrap {
+    @include flexbox.flexbox('between');
+    margin-bottom: 16px;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .averageWrap {
+      display: flex;
+      align-items: flex-start;
+      text-align: right;
+    }
+
+    dt {
+      margin-right: 12px;
+    }
+
+    dd {
+      font-size: 16px;
+      color: colors.$TEXT_EMERALD;
+    }
+  }
 }

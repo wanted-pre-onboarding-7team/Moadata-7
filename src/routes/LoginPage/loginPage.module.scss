@@ -18,8 +18,6 @@
       margin-bottom: 8vh;
       font-size: 32px;
       font-weight: 600;
-      color: colors.$TEXT_PRIMARY;
-      letter-spacing: 0.5px;
     }
 
     .guideWrapper {
@@ -30,11 +28,10 @@
       .guide {
         font-size: 14px;
         color: colors.$TEXT_SECONDARY;
-        letter-spacing: 0.5px;
       }
 
       .warning {
-        color: colors.$TEXT_RED;
+        color: colors.$TEXT_PURPLE;
       }
     }
 
@@ -48,7 +45,8 @@
 
   .logo {
     width: 140px;
-    height: 35px;
+    height: 100px;
     margin-top: 15vh;
+    filter: grayscale(1) brightness(2.7);
   }
 }

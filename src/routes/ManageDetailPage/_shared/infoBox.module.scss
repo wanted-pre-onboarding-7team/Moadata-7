@@ -1,0 +1,45 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/container';
+@use '/src/styles/mixins/position';
+@use '/src/styles/mixins/responsive';
+
+.rangeWrap {
+  @include flexbox.columnFlexbox;
+  padding: 10px 24px;
+  margin-top: 24px;
+}
+
+.periodBox {
+  @include flexbox.flexbox;
+  margin-top: 12px;
+
+  dt {
+    margin-right: 12px;
+  }
+
+  dd {
+    color: colors.$TEXT_SECONDARY;
+  }
+}
+
+.buttonsBackground {
+  @include position.relative(auto auto 8px);
+  padding: 4px;
+  background: colors.$BG_G;
+  border-radius: 5px;
+
+  button {
+    width: 72px;
+    padding: 5px 0;
+    color: colors.$TEXT_SECONDARY;
+    border-radius: 5px;
+  }
+
+  .startButton,
+  .weekButton,
+  .allButton {
+    color: colors.$TEXT_WHITE;
+    background: colors.$TEXT_PURPLE;
+  }
+}

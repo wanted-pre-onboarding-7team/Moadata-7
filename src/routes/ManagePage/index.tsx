@@ -18,7 +18,7 @@ const ManagePage = () => {
   return (
     <>
       <SEO title='회원관리' />
-      <nav className={styles.subNav}>홈 &gt; 회원관리</nav>
+      <nav className={styles.subNav}>홈 &nbsp; &gt; &nbsp; 회원관리</nav>
       <h1 className={styles.title}>회원관리</h1>
       <h2 className={styles.subTitle}>회원검색</h2>
       <Search />

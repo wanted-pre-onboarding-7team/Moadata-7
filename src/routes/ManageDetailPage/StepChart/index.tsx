@@ -55,7 +55,7 @@ const StepChart = () => {
 
     const endDayArray = {
       시작일: dayjs(userInfo.crt_ymdt).format('YYYY-MM-DD'),
-      일주일: dayjs(userInfo.crt_ymdt).add(1, 'week').format('YYYY-MM-DD'),
+      일주일: dayjs(userInfo.crt_ymdt).add(6, 'day').format('YYYY-MM-DD'),
       전체: dayjs().format('YYYY-MM-DD'),
     }[onClickText]
 
@@ -74,7 +74,7 @@ const StepChart = () => {
         <h2>걸음수</h2>
         <div className={styles.averageWrap}>
           <dt>총</dt>
-          <dd>{totalStep} 걸음</dd>
+          <dd>{totalStep.toLocaleString()} 걸음</dd>
         </div>
       </div>
       <Chart StepDataList={changeDB(selectRange)} selectRange={selectRange} />
